@@ -76,14 +76,27 @@ export default function Contact() {
             >
               <div>
                 <label className="block text-sm font-medium text-light-gray mb-2">
-                  Name
+                  First Name
                 </label>
                 <input
                   type="text"
-                  name="name"
+                  name="first_name"
                   required
                   className="w-full px-4 py-3 rounded-lg bg-dark border border-white/10 text-white placeholder-gray focus:border-navy-light focus:outline-none transition-colors"
-                  placeholder="Your name"
+                  placeholder="First name"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-light-gray mb-2">
+                  Last Name
+                </label>
+                <input
+                  type="text"
+                  name="last_name"
+                  required
+                  className="w-full px-4 py-3 rounded-lg bg-dark border border-white/10 text-white placeholder-gray focus:border-navy-light focus:outline-none transition-colors"
+                  placeholder="Last name"
                 />
               </div>
 
@@ -97,6 +110,42 @@ export default function Contact() {
                   required
                   className="w-full px-4 py-3 rounded-lg bg-dark border border-white/10 text-white placeholder-gray focus:border-navy-light focus:outline-none transition-colors"
                   placeholder="your@email.com"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-light-gray mb-2">
+                  Phone Number
+                </label>
+                <input
+                  type="tel"
+                  name="phone"
+                  className="w-full px-4 py-3 rounded-lg bg-dark border border-white/10 text-white placeholder-gray focus:border-navy-light focus:outline-none transition-colors"
+                  placeholder="(555) 123-4567"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-light-gray mb-2">
+                  Business / Company Name
+                </label>
+                <input
+                  type="text"
+                  name="company"
+                  className="w-full px-4 py-3 rounded-lg bg-dark border border-white/10 text-white placeholder-gray focus:border-navy-light focus:outline-none transition-colors"
+                  placeholder="Your business name"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-light-gray mb-2">
+                  Website URL (if existing)
+                </label>
+                <input
+                  type="url"
+                  name="current_website"
+                  className="w-full px-4 py-3 rounded-lg bg-dark border border-white/10 text-white placeholder-gray focus:border-navy-light focus:outline-none transition-colors"
+                  placeholder="https://yoursite.com"
                 />
               </div>
 
@@ -134,17 +183,65 @@ export default function Contact() {
                 </select>
               </div>
 
+              <div>
+                <label className="block text-sm font-medium text-light-gray mb-2">
+                  Preferred Platform
+                </label>
+                <select
+                  name="platform"
+                  className="w-full px-4 py-3 rounded-lg bg-dark border border-white/10 text-white focus:border-navy-light focus:outline-none transition-colors"
+                >
+                  <option value="">Not sure / No preference</option>
+                  <option value="custom">Custom (Next.js / React)</option>
+                  <option value="wordpress">WordPress</option>
+                  <option value="webflow">Webflow</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-light-gray mb-2">
+                  Timeline
+                </label>
+                <select
+                  name="timeline"
+                  className="w-full px-4 py-3 rounded-lg bg-dark border border-white/10 text-white focus:border-navy-light focus:outline-none transition-colors"
+                >
+                  <option value="">Select timeline</option>
+                  <option value="asap">ASAP</option>
+                  <option value="1-2 weeks">1-2 weeks</option>
+                  <option value="1 month">Within a month</option>
+                  <option value="flexible">Flexible / No rush</option>
+                </select>
+              </div>
+
               <div className="md:col-span-2">
                 <label className="block text-sm font-medium text-light-gray mb-2">
-                  Message
+                  Tell us about your project
                 </label>
                 <textarea
                   name="message"
                   rows={5}
                   required
                   className="w-full px-4 py-3 rounded-lg bg-dark border border-white/10 text-white placeholder-gray focus:border-navy-light focus:outline-none transition-colors resize-none"
-                  placeholder="Tell us about your project..."
+                  placeholder="What does your business do? What are your goals for the website? Any features or inspiration sites you have in mind?"
                 />
+              </div>
+
+              <div className="md:col-span-2">
+                <label className="block text-sm font-medium text-light-gray mb-2">
+                  How did you hear about us?
+                </label>
+                <select
+                  name="referral_source"
+                  className="w-full px-4 py-3 rounded-lg bg-dark border border-white/10 text-white focus:border-navy-light focus:outline-none transition-colors"
+                >
+                  <option value="">Select one</option>
+                  <option value="google">Google Search</option>
+                  <option value="social-media">Social Media</option>
+                  <option value="fiverr">Fiverr</option>
+                  <option value="referral">Referral / Word of Mouth</option>
+                  <option value="other">Other</option>
+                </select>
               </div>
 
               <div className="md:col-span-2">
@@ -155,7 +252,7 @@ export default function Contact() {
                   whileTap={{ scale: 0.98 }}
                   className="w-full py-4 bg-navy-light text-white font-semibold rounded-xl hover:bg-navy-light/90 transition-all duration-200 text-lg disabled:opacity-50"
                 >
-                  {loading ? "Sending..." : "Send Message"}
+                  {loading ? "Sending..." : "Get Started"}
                 </motion.button>
               </div>
             </form>

@@ -7,27 +7,27 @@ import AnimatedSection from "./ui/AnimatedSection";
 const steps = [
   {
     number: "01",
-    title: "Discovery",
+    title: "Consultation",
     description:
-      "We learn about your business, goals, audience, and competitors. Every great project starts with understanding.",
+      "We discuss your business, goals, and which package fits your needs. You choose a plan and we outline the scope together.",
   },
   {
     number: "02",
-    title: "Design",
+    title: "Content & Build",
     description:
-      "Wireframes and mockups that bring your vision to life. We iterate until the design is exactly right.",
+      "You provide your text, images, and branding. We build your site with a clean layout, mobile responsiveness, and SEO setup.",
   },
   {
     number: "03",
-    title: "Develop",
+    title: "Review & Revise",
     description:
-      "Clean, performant code built with modern frameworks. Responsive, fast, and accessible on every device.",
+      "You review the site and request changes within your included revision rounds. We refine until you're satisfied.",
   },
   {
     number: "04",
-    title: "Launch",
+    title: "Launch & Support",
     description:
-      "Rigorous testing, SEO optimization, and deployment. We ensure a flawless launch and provide ongoing support.",
+      "We deploy your site, optimize for speed, and hand everything over. Optional monthly care plan to keep it running smoothly.",
   },
 ];
 

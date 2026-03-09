@@ -6,35 +6,35 @@ import AnimatedSection from "./ui/AnimatedSection";
 
 const projects = [
   {
-    title: "E-Commerce Platform",
-    category: "Web Application",
+    title: "Local Bakery Website",
+    category: "Starter Website",
     description:
-      "Full-stack e-commerce solution with real-time inventory, Stripe payments, and admin dashboard.",
-    tech: ["Next.js", "Node.js", "PostgreSQL"],
+      "Clean 3-page site for a local bakery featuring menu, location info, and a contact form. Mobile-first design with fast load times.",
+    tech: ["Next.js", "Tailwind", "Vercel"],
     color: "from-blue-600/20 to-navy/20",
   },
   {
-    title: "SaaS Dashboard",
-    category: "Web Application",
+    title: "Law Firm Website",
+    category: "Business Website",
     description:
-      "Analytics dashboard with real-time data visualization, user management, and reporting tools.",
-    tech: ["React", "D3.js", "Firebase"],
+      "Professional 7-page business site with practice area pages, attorney profiles, client testimonials, and intake form with analytics tracking.",
+    tech: ["Next.js", "Tailwind", "Google Analytics"],
     color: "from-navy/20 to-indigo-600/20",
   },
   {
-    title: "Restaurant Website",
-    category: "Custom Website",
+    title: "Boutique Clothing Store",
+    category: "E-Commerce Website",
     description:
-      "Modern restaurant site with online ordering, reservation system, and menu management.",
-    tech: ["Next.js", "Tailwind", "Supabase"],
+      "Full online store with Stripe payments, product catalog, shipping setup, and order notification emails. Launched with 25 products.",
+    tech: ["Next.js", "Stripe", "Supabase"],
     color: "from-indigo-600/20 to-blue-600/20",
   },
   {
-    title: "Startup Landing Page",
-    category: "Landing Page",
+    title: "Fitness Studio Website",
+    category: "Business Website",
     description:
-      "High-converting landing page with A/B tested layouts. Achieved 12% conversion rate.",
-    tech: ["React", "Framer Motion", "Vercel"],
+      "Business site with class schedules, trainer bios, online booking integration, and SEO-optimized service pages that doubled organic traffic.",
+    tech: ["React", "Tailwind", "Vercel"],
     color: "from-navy-light/20 to-navy/20",
   },
 ];

@@ -6,8 +6,8 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
   title: "Visionary Dev LLC | Web Development That Converts",
   description:
-    "Professional web development services. Custom websites, web applications, e-commerce, and landing pages built to convert visitors into customers.",
-  keywords: "web development, web design, custom websites, web applications, e-commerce",
+    "Professional web development services. Starter websites, business websites, e-commerce stores, and ongoing care plans built to convert visitors into customers.",
+  keywords: "web development, web design, business website, e-commerce website, starter website",
   openGraph: {
     title: "Visionary Dev LLC | Web Development That Converts",
     description:

@@ -110,10 +110,10 @@ export default function Contact() {
                   className="w-full px-4 py-3 rounded-lg bg-dark border border-white/10 text-white focus:border-navy-light focus:outline-none transition-colors"
                 >
                   <option value="">Select a service</option>
-                  <option value="website">Custom Website</option>
-                  <option value="webapp">Web Application</option>
-                  <option value="ecommerce">E-Commerce</option>
-                  <option value="landing">Landing Page</option>
+                  <option value="starter">Starter Website</option>
+                  <option value="business">Business Website</option>
+                  <option value="ecommerce">E-Commerce Website</option>
+                  <option value="care-plan">Monthly Care Plan</option>
                   <option value="other">Other</option>
                 </select>
               </div>
@@ -127,10 +127,10 @@ export default function Contact() {
                   className="w-full px-4 py-3 rounded-lg bg-dark border border-white/10 text-white focus:border-navy-light focus:outline-none transition-colors"
                 >
                   <option value="">Select budget</option>
-                  <option value="1k-3k">$1,000 - $3,000</option>
-                  <option value="3k-5k">$3,000 - $5,000</option>
-                  <option value="5k-10k">$5,000 - $10,000</option>
-                  <option value="10k+">$10,000+</option>
+                  <option value="500-1200">$500 - $1,200</option>
+                  <option value="1500-3000">$1,500 - $3,000</option>
+                  <option value="3000-5000">$3,000 - $5,000</option>
+                  <option value="5000+">$5,000+</option>
                 </select>
               </div>
 

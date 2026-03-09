@@ -4,11 +4,10 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
-  { name: "Services", href: "#services" },
-  { name: "Process", href: "#process" },
-  { name: "Work", href: "#portfolio" },
-  { name: "About", href: "#about" },
-  { name: "Contact", href: "#contact" },
+  { name: "Services", href: "/#services" },
+  { name: "Work", href: "/#portfolio" },
+  { name: "About", href: "/#about" },
+  { name: "Contact", href: "/#contact" },
 ];
 
 export default function Navbar() {
@@ -43,7 +42,7 @@ export default function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           {/* Logo */}
-          <a href="#" className="text-xl font-bold tracking-tight">
+          <a href="/" className="text-xl font-bold tracking-tight">
             <span className="text-white">VISIONARY</span>
             <span className="text-navy-light"> DEV</span>
           </a>
@@ -60,7 +59,7 @@ export default function Navbar() {
               </a>
             ))}
             <a
-              href="#contact"
+              href="/#contact"
               className="px-5 py-2 bg-navy-light text-white text-sm font-medium rounded-lg hover:bg-navy-light/80 transition-all duration-200"
             >
               Get Started
@@ -113,7 +112,7 @@ export default function Navbar() {
               </motion.a>
             ))}
             <motion.a
-              href="#contact"
+              href="/#contact"
               onClick={() => setMobileOpen(false)}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}

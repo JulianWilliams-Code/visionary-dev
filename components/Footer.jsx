@@ -1,11 +1,11 @@
 "use client";
 
 const footerLinks = [
-  { name: "Services", href: "#services" },
-  { name: "Process", href: "#process" },
-  { name: "Work", href: "#portfolio" },
-  { name: "About", href: "#about" },
-  { name: "Contact", href: "#contact" },
+  { name: "Services", href: "/#services" },
+  { name: "Work", href: "/#portfolio" },
+  { name: "About", href: "/#about" },
+  { name: "FAQ", href: "/#faq" },
+  { name: "Contact", href: "/#contact" },
 ];
 
 export default function Footer() {
@@ -14,7 +14,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           {/* Logo */}
-          <a href="#" className="text-xl font-bold tracking-tight">
+          <a href="/" className="text-xl font-bold tracking-tight">
             <span className="text-white">VISIONARY</span>
             <span className="text-navy-light"> DEV</span>
           </a>

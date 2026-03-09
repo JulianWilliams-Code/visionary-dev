@@ -27,65 +27,52 @@ export default function Hero() {
       {/* Content */}
       <motion.div
         style={{ y, opacity }}
-        className="relative z-10 max-w-5xl mx-auto px-6 text-center"
+        className="relative z-10 max-w-4xl mx-auto px-6 text-center"
       >
-        {/* Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-8"
-        >
-          <span className="w-2 h-2 rounded-full bg-navy-light animate-pulse" />
-          <span className="text-sm text-light-gray">
-            Web Development Studio
-          </span>
-        </motion.div>
-
         {/* Headline */}
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
           className="text-4xl sm:text-5xl md:text-7xl font-bold leading-tight tracking-tight mb-6"
         >
-          We Build Digital
+          Professional Websites
           <br />
+          for{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-navy-light to-blue-400">
-            Experiences
-          </span>{" "}
-          That Convert
+            Small Businesses
+          </span>
         </motion.h1>
 
         {/* Subtext */}
         <motion.p
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="text-lg md:text-xl text-light-gray max-w-2xl mx-auto mb-10"
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="text-lg md:text-xl text-light-gray max-w-xl mx-auto mb-10"
         >
-          From concept to launch, we craft high-performance websites and web
-          applications that drive results for your business.
+          Custom-built websites for local businesses, service companies,
+          and startups — designed to grow with you.
         </motion.p>
 
         {/* CTA Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
           <a
-            href="#contact"
+            href="/#contact"
             className="glow-button px-8 py-4 bg-navy-light text-white font-semibold rounded-xl hover:bg-navy-light/90 transition-all duration-200 text-lg"
           >
-            Start Your Project
+            Start a Project
           </a>
           <a
-            href="#portfolio"
+            href="/#portfolio"
             className="px-8 py-4 border border-white/20 text-white font-semibold rounded-xl hover:bg-white/5 transition-all duration-200 text-lg"
           >
-            View Our Work
+            See Our Work
           </a>
         </motion.div>
       </motion.div>

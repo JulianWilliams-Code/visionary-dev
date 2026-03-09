@@ -31,18 +31,11 @@ export default function Testimonials() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-24 md:py-32 bg-dark relative">
-      <div className="max-w-4xl mx-auto px-6">
-        <AnimatedSection className="text-center mb-16">
-          <p className="text-navy-light font-semibold text-sm tracking-widest uppercase mb-4">
-            Testimonials
-          </p>
-          <h2 className="text-3xl md:text-5xl font-bold">
-            What Our{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-navy-light to-blue-400">
-              Clients
-            </span>{" "}
-            Say
+    <section className="py-16 md:py-24 bg-dark relative">
+      <div className="max-w-3xl mx-auto px-6">
+        <AnimatedSection className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold">
+            What Our Clients Say
           </h2>
         </AnimatedSection>
 
@@ -53,9 +46,8 @@ export default function Testimonials() {
             transition={{ duration: 0.6 }}
             className="relative"
           >
-            {/* Quote */}
-            <div className="text-center mb-12">
-              <div className="text-6xl text-navy-light/30 font-serif mb-4">
+            <div className="text-center mb-10">
+              <div className="text-5xl text-navy-light/20 font-serif mb-6">
                 &ldquo;
               </div>
               <motion.p
@@ -63,7 +55,7 @@ export default function Testimonials() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
-                className="text-lg md:text-2xl text-off-white leading-relaxed max-w-3xl mx-auto mb-8"
+                className="text-lg md:text-xl text-off-white leading-relaxed max-w-2xl mx-auto mb-8"
               >
                 {testimonials[active].quote}
               </motion.p>
@@ -73,7 +65,7 @@ export default function Testimonials() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.4, delay: 0.2 }}
               >
-                <p className="font-semibold text-lg">
+                <p className="font-semibold">
                   {testimonials[active].name}
                 </p>
                 <p className="text-gray text-sm">
@@ -88,9 +80,9 @@ export default function Testimonials() {
                 <button
                   key={index}
                   onClick={() => setActive(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
                     index === active
-                      ? "bg-navy-light w-8"
+                      ? "bg-navy-light w-7"
                       : "bg-white/20 hover:bg-white/40"
                   }`}
                   aria-label={`Testimonial ${index + 1}`}

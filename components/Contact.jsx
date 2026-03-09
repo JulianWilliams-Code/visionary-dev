@@ -39,8 +39,8 @@ export default function Contact() {
       <div className="absolute inset-0 gradient-bg opacity-50" />
       <div className="absolute inset-0 bg-dark/70" />
 
-      <div className="relative z-10 max-w-4xl mx-auto px-6">
-        <AnimatedSection className="text-center mb-12">
+      <div className="relative z-10 max-w-2xl mx-auto px-6">
+        <AnimatedSection className="text-center mb-10">
           <p className="text-navy-light font-semibold text-sm tracking-widest uppercase mb-4">
             Get In Touch
           </p>
@@ -51,7 +51,7 @@ export default function Contact() {
             </span>
           </h2>
           <p className="text-gray text-lg max-w-xl mx-auto">
-            Ready to start your project? Fill out the form below and we&apos;ll
+            Ready to start your project? Tell us what you need and we&apos;ll
             get back to you within 24 hours.
           </p>
         </AnimatedSection>
@@ -72,7 +72,7 @@ export default function Contact() {
           ) : (
             <form
               onSubmit={handleSubmit}
-              className="grid grid-cols-1 md:grid-cols-2 gap-6 p-8 md:p-12 rounded-2xl bg-dark-gray/30 border border-white/5 backdrop-blur-sm"
+              className="grid grid-cols-1 md:grid-cols-2 gap-5 p-8 md:p-10 rounded-2xl bg-dark-gray/30 border border-white/5 backdrop-blur-sm"
             >
               <div>
                 <label className="block text-sm font-medium text-light-gray mb-2">
@@ -100,7 +100,7 @@ export default function Contact() {
                 />
               </div>
 
-              <div>
+              <div className="md:col-span-2">
                 <label className="block text-sm font-medium text-light-gray mb-2">
                   Email
                 </label>
@@ -113,45 +113,9 @@ export default function Contact() {
                 />
               </div>
 
-              <div>
+              <div className="md:col-span-2">
                 <label className="block text-sm font-medium text-light-gray mb-2">
-                  Phone Number
-                </label>
-                <input
-                  type="tel"
-                  name="phone"
-                  className="w-full px-4 py-3 rounded-lg bg-dark border border-white/10 text-white placeholder-gray focus:border-navy-light focus:outline-none transition-colors"
-                  placeholder="(555) 123-4567"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-light-gray mb-2">
-                  Business / Company Name
-                </label>
-                <input
-                  type="text"
-                  name="company"
-                  className="w-full px-4 py-3 rounded-lg bg-dark border border-white/10 text-white placeholder-gray focus:border-navy-light focus:outline-none transition-colors"
-                  placeholder="Your business name"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-light-gray mb-2">
-                  Website URL (if existing)
-                </label>
-                <input
-                  type="url"
-                  name="current_website"
-                  className="w-full px-4 py-3 rounded-lg bg-dark border border-white/10 text-white placeholder-gray focus:border-navy-light focus:outline-none transition-colors"
-                  placeholder="https://yoursite.com"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-light-gray mb-2">
-                  Project Type
+                  What are you looking for?
                 </label>
                 <select
                   name="project_type"
@@ -167,81 +131,17 @@ export default function Contact() {
                 </select>
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-light-gray mb-2">
-                  Budget Range
-                </label>
-                <select
-                  name="budget"
-                  className="w-full px-4 py-3 rounded-lg bg-dark border border-white/10 text-white focus:border-navy-light focus:outline-none transition-colors"
-                >
-                  <option value="">Select budget</option>
-                  <option value="500-1200">$500 - $1,200</option>
-                  <option value="1500-3000">$1,500 - $3,000</option>
-                  <option value="3000-5000">$3,000 - $5,000</option>
-                  <option value="5000+">$5,000+</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-light-gray mb-2">
-                  Preferred Platform
-                </label>
-                <select
-                  name="platform"
-                  className="w-full px-4 py-3 rounded-lg bg-dark border border-white/10 text-white focus:border-navy-light focus:outline-none transition-colors"
-                >
-                  <option value="">Not sure / No preference</option>
-                  <option value="custom">Custom (Next.js / React)</option>
-                  <option value="wordpress">WordPress</option>
-                  <option value="webflow">Webflow</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-light-gray mb-2">
-                  Timeline
-                </label>
-                <select
-                  name="timeline"
-                  className="w-full px-4 py-3 rounded-lg bg-dark border border-white/10 text-white focus:border-navy-light focus:outline-none transition-colors"
-                >
-                  <option value="">Select timeline</option>
-                  <option value="asap">ASAP</option>
-                  <option value="1-2 weeks">1-2 weeks</option>
-                  <option value="1 month">Within a month</option>
-                  <option value="flexible">Flexible / No rush</option>
-                </select>
-              </div>
-
               <div className="md:col-span-2">
                 <label className="block text-sm font-medium text-light-gray mb-2">
                   Tell us about your project
                 </label>
                 <textarea
                   name="message"
-                  rows={5}
+                  rows={4}
                   required
                   className="w-full px-4 py-3 rounded-lg bg-dark border border-white/10 text-white placeholder-gray focus:border-navy-light focus:outline-none transition-colors resize-none"
-                  placeholder="What does your business do? What are your goals for the website? Any features or inspiration sites you have in mind?"
+                  placeholder="What does your business do? What are your goals for the website?"
                 />
-              </div>
-
-              <div className="md:col-span-2">
-                <label className="block text-sm font-medium text-light-gray mb-2">
-                  How did you hear about us?
-                </label>
-                <select
-                  name="referral_source"
-                  className="w-full px-4 py-3 rounded-lg bg-dark border border-white/10 text-white focus:border-navy-light focus:outline-none transition-colors"
-                >
-                  <option value="">Select one</option>
-                  <option value="google">Google Search</option>
-                  <option value="social-media">Social Media</option>
-                  <option value="fiverr">Fiverr</option>
-                  <option value="referral">Referral / Word of Mouth</option>
-                  <option value="other">Other</option>
-                </select>
               </div>
 
               <div className="md:col-span-2">

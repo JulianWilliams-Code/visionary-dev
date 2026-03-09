@@ -36,17 +36,14 @@ export default function Process() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="process" className="py-24 md:py-32 section-gradient relative">
+    <section id="process" className="py-20 md:py-28 section-gradient relative">
       <div className="max-w-7xl mx-auto px-6">
-        <AnimatedSection className="text-center mb-16">
+        <AnimatedSection className="text-center mb-14">
           <p className="text-navy-light font-semibold text-sm tracking-widest uppercase mb-4">
             How We Work
           </p>
           <h2 className="text-3xl md:text-5xl font-bold">
-            Our Proven{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-navy-light to-blue-400">
-              Process
-            </span>
+            Our Proven Process
           </h2>
         </AnimatedSection>
 
@@ -74,7 +71,7 @@ export default function Process() {
                     </span>
                   </motion.div>
 
-                  {/* Vertical connector - mobile */}
+                  {/* Horizontal connector - mobile */}
                   {index < steps.length - 1 && (
                     <div className="lg:hidden h-0.5 w-full bg-gradient-to-r from-navy-light/30 to-transparent" />
                   )}

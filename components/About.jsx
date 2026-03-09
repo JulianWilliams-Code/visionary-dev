@@ -4,28 +4,24 @@ import AnimatedSection from "./ui/AnimatedSection";
 import Counter from "./ui/Counter";
 
 const stats = [
-  { value: 50, suffix: "+", label: "Projects Completed" },
-  { value: 30, suffix: "+", label: "Happy Clients" },
-  { value: 5, suffix: "+", label: "Years Experience" },
-  { value: 99, suffix: "%", label: "Client Satisfaction" },
+  { value: 50, suffix: "+", label: "Projects" },
+  { value: 30, suffix: "+", label: "Clients" },
+  { value: 5, suffix: "+", label: "Years" },
 ];
 
 export default function About() {
   return (
     <section id="about" className="py-24 md:py-32 section-gradient relative">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Text */}
-          <AnimatedSection direction="left">
+      <div className="max-w-5xl mx-auto px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-16 items-start">
+          {/* Text — wider column */}
+          <AnimatedSection direction="left" className="lg:col-span-3">
             <p className="text-navy-light font-semibold text-sm tracking-widest uppercase mb-4">
               About Us
             </p>
-            <h2 className="text-3xl md:text-5xl font-bold mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
               Building the Web,{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-navy-light to-blue-400">
-                One Vision
-              </span>{" "}
-              at a Time
+              One Vision at a Time
             </h2>
             <p className="text-gray leading-relaxed mb-6">
               Visionary Dev LLC is a web development studio focused on creating
@@ -40,16 +36,34 @@ export default function About() {
               businesses, we deliver results that matter.
             </p>
 
-            <div className="flex flex-wrap gap-3">
+            {/* Stats — inline row, not the centerpiece */}
+            <div className="flex gap-8 pt-6 border-t border-white/5">
+              {stats.map((stat) => (
+                <div key={stat.label}>
+                  <div className="text-2xl font-bold text-navy-light">
+                    <Counter target={stat.value} suffix={stat.suffix} />
+                  </div>
+                  <p className="text-gray text-xs mt-1">{stat.label}</p>
+                </div>
+              ))}
+            </div>
+          </AnimatedSection>
+
+          {/* Tech stack — narrower column */}
+          <AnimatedSection direction="right" className="lg:col-span-2">
+            <p className="text-sm font-medium text-light-gray mb-4">
+              Technologies we work with
+            </p>
+            <div className="flex flex-wrap gap-2.5">
               {[
-                "React / Next.js",
+                "Next.js",
+                "React",
+                "WordPress",
+                "Webflow",
                 "Node.js",
                 "Tailwind CSS",
-                "PostgreSQL",
-                "MongoDB",
-                "Vercel",
-                "AWS",
                 "Stripe",
+                "Vercel",
               ].map((tech) => (
                 <span
                   key={tech}
@@ -57,23 +71,6 @@ export default function About() {
                 >
                   {tech}
                 </span>
-              ))}
-            </div>
-          </AnimatedSection>
-
-          {/* Stats */}
-          <AnimatedSection direction="right">
-            <div className="grid grid-cols-2 gap-6">
-              {stats.map((stat) => (
-                <div
-                  key={stat.label}
-                  className="p-6 rounded-2xl bg-dark/50 border border-white/5 text-center"
-                >
-                  <div className="text-4xl md:text-5xl font-bold text-navy-light mb-2">
-                    <Counter target={stat.value} suffix={stat.suffix} />
-                  </div>
-                  <p className="text-gray text-sm">{stat.label}</p>
-                </div>
               ))}
             </div>
           </AnimatedSection>

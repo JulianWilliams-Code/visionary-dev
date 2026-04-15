@@ -43,7 +43,13 @@ export default async function SitePage({ params }) {
             {site.published ? "Live" : "Draft"}
           </span>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-4">
+          <Link
+            href={`/dashboard/sites/${site.id}/leads`}
+            className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
+          >
+            📋 Leads
+          </Link>
           <a
             href={`/s/${site.subdomain}`}
             target="_blank"

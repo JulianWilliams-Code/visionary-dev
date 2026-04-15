@@ -46,6 +46,7 @@ export function SiteRenderer({ site, isPreview = false }) {
             key={sectionId}
             content={sectionContent}
             theme={theme}
+            siteId={site.id}
           />
         )
       })}

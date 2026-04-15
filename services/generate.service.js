@@ -2,6 +2,8 @@
 // No side effects, no DB calls, no API calls.
 // Swap the body for an AI call later without touching anything else.
 
+import { TEMPLATE_BY_TYPE, DEFAULT_TEMPLATE_ID } from "@/config/templates"
+
 const CTA_BY_TYPE = {
   "personal trainer":      "Book a Free Fitness Consult",
   "life coach":            "Book a Free Discovery Call",
@@ -25,18 +27,24 @@ const ABOUT_OPENER_BY_TYPE = {
 }
 
 export function generateSiteContent(intake) {
-  const type     = intake.businessType?.toLowerCase() ?? "other"
-  const ctaText  = CTA_BY_TYPE[type]  ?? "Book a Free Consultation"
-  const opener   = ABOUT_OPENER_BY_TYPE[type] ?? "I help clients achieve their most important goals"
-  const location = intake.location ? ` in ${intake.location}` : ""
+  const type       = intake.businessType?.toLowerCase() ?? "other"
+  const ctaText    = CTA_BY_TYPE[type]  ?? "Book a Free Consultation"
+  const opener     = ABOUT_OPENER_BY_TYPE[type] ?? "I help clients achieve their most important goals"
+  const location   = intake.location ? ` in ${intake.location}` : ""
+  const templateId = TEMPLATE_BY_TYPE[type] ?? DEFAULT_TEMPLATE_ID
 
   return {
+    // Template ID is stored in content so the renderer can resolve it
+    // without a separate DB column — changing templates is a content update.
+    templateId,
+
     hero: {
       headline:    intake.tagline?.trim() || `${opener}${location}.`,
       subheadline: `${intake.businessName} — professional ${intake.businessType} services${location}.`,
       ctaText,
       ctaHref: "#contact",
     },
+
     services: {
       heading: "What I Offer",
       items: intake.services
@@ -47,18 +55,24 @@ export function generateSiteContent(intake) {
           description: s.description?.trim() || "",
         })) ?? [],
     },
+
     about: {
       heading: `About ${intake.businessName}`,
       bio:     intake.description?.trim() ||
         `${opener}${location}. With a personalized approach tailored to your unique situation, I provide the tools, accountability, and expertise you need to succeed.`,
+      // SiteAbout reads ctaText from content, not from a separate prop
+      ctaText,
+      ctaHref: "#contact",
     },
+
     contact: {
       heading:    "Let's Get Started",
-      subheading: `Ready to begin? Reach out and I'll get back to you within 24 hours.`,
+      subheading: "Ready to begin? Reach out and I'll get back to you within 24 hours.",
       email:    intake.contact?.email ?? "",
       phone:    intake.contact?.phone ?? "",
       location: intake.location ?? "",
     },
+
     meta: {
       businessName: intake.businessName,
       businessType: intake.businessType,

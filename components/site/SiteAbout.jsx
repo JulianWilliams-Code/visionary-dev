@@ -1,6 +1,6 @@
-export default function SiteAbout({ content, ctaText }) {
+export default function SiteAbout({ content, theme }) {
   return (
-    <section id="about" className="py-24 px-4 bg-gray-50">
+    <section id="about" className={`py-24 px-4 ${theme.sectionBgAlt}`}>
       <div className="max-w-3xl mx-auto text-center">
         <h2 className="text-3xl font-bold text-gray-900 mb-6">
           {content?.heading}
@@ -9,10 +9,10 @@ export default function SiteAbout({ content, ctaText }) {
           {content?.bio}
         </p>
         <a
-          href="#contact"
-          className="mt-10 inline-block rounded-lg bg-gray-900 px-8 py-4 text-base font-semibold text-white hover:bg-gray-700 transition-colors"
+          href={content?.ctaHref ?? "#contact"}
+          className={`mt-10 inline-block rounded-lg px-8 py-4 text-base font-semibold transition-colors ${theme.primaryBtn}`}
         >
-          {ctaText ?? "Get in Touch"}
+          {content?.ctaText ?? "Get in Touch"}
         </a>
       </div>
     </section>

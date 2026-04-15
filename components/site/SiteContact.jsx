@@ -3,11 +3,14 @@
 import { useActionState } from "react"
 import { submitLeadAction } from "@/app/s/actions"
 
-export default function SiteContact({ content, siteId }) {
+export default function SiteContact({ content, siteId, theme }) {
   const [state, formAction, pending] = useActionState(
     submitLeadAction.bind(null, siteId),
     null
   )
+
+  // Base input class — focus color injected from theme
+  const inputCls = `w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-1 ${theme.inputFocus}`
 
   return (
     <section id="contact" className="py-24 px-4 bg-white">
@@ -20,7 +23,7 @@ export default function SiteContact({ content, siteId }) {
         </p>
 
         {state?.success ? (
-          <div className="rounded-2xl bg-green-50 border border-green-200 p-8 text-center">
+          <div className={`rounded-2xl ${theme.accentBg} border ${theme.accentBorder} p-8 text-center`}>
             <div className="text-4xl mb-3">✅</div>
             <p className="font-semibold text-gray-900">Message sent!</p>
             <p className="text-sm text-gray-500 mt-1">
@@ -38,34 +41,17 @@ export default function SiteContact({ content, siteId }) {
             <div className="grid sm:grid-cols-2 gap-4">
               <div className="flex flex-col gap-1">
                 <label className="text-sm font-medium text-gray-700">Name</label>
-                <input
-                  name="name"
-                  type="text"
-                  required
-                  placeholder="Jane Smith"
-                  className="rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-                />
+                <input name="name" type="text" required placeholder="Jane Smith" className={inputCls} />
               </div>
               <div className="flex flex-col gap-1">
                 <label className="text-sm font-medium text-gray-700">Email</label>
-                <input
-                  name="email"
-                  type="email"
-                  required
-                  placeholder="jane@example.com"
-                  className="rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-                />
+                <input name="email" type="email" required placeholder="jane@example.com" className={inputCls} />
               </div>
             </div>
 
             <div className="flex flex-col gap-1">
               <label className="text-sm font-medium text-gray-700">Phone</label>
-              <input
-                name="phone"
-                type="tel"
-                placeholder="(512) 555-0123 (optional)"
-                className="rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-              />
+              <input name="phone" type="tel" placeholder="(512) 555-0123 (optional)" className={inputCls} />
             </div>
 
             <div className="flex flex-col gap-1">
@@ -74,21 +60,20 @@ export default function SiteContact({ content, siteId }) {
                 name="message"
                 rows={4}
                 placeholder="Tell me about your goals…"
-                className="rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 resize-none"
+                className={`${inputCls} resize-none`}
               />
             </div>
 
             <button
               type="submit"
               disabled={pending}
-              className="w-full rounded-lg bg-blue-600 px-4 py-3 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className={`w-full rounded-lg px-4 py-3 text-sm font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${theme.primaryBtn}`}
             >
               {pending ? "Sending…" : "Send message →"}
             </button>
           </form>
         )}
 
-        {/* Contact details */}
         <div className="mt-10 flex flex-wrap justify-center gap-6 text-sm text-gray-400">
           {content?.email    && <span>✉ {content.email}</span>}
           {content?.phone    && <span>📞 {content.phone}</span>}

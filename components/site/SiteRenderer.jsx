@@ -1,53 +1,56 @@
-import SiteHero     from "./SiteHero"
-import SiteServices from "./SiteServices"
-import SiteAbout    from "./SiteAbout"
-import SiteContact  from "./SiteContact"
+import { TEMPLATES, DEFAULT_TEMPLATE_ID } from "@/config/templates"
+import { SECTION_REGISTRY }               from "./registry"
+import SiteNavbar                          from "./SiteNavbar"
+import SiteFooter                          from "./SiteFooter"
 
-// Server Component — receives the full site record from the DB.
-// Reused for both the dashboard preview and the live public site.
+// Server Component.
+// Resolves the template, then composes the page from registry sections.
+// Reused for: dashboard preview, public /s/[subdomain] route.
 export function SiteRenderer({ site, isPreview = false }) {
   const { content } = site
 
+  // Fall back to default if stored templateId is unknown or missing
+  const templateId = content.templateId ?? DEFAULT_TEMPLATE_ID
+  const template   = TEMPLATES[templateId] ?? TEMPLATES[DEFAULT_TEMPLATE_ID]
+  const { theme }  = template
+
   return (
     <div className="min-h-screen bg-white font-sans">
-      {/* Preview banner */}
+
+      {/* Preview banner — dashboard only */}
       {isPreview && (
-        <div className="bg-blue-600 text-white text-center text-sm py-2 px-4 font-medium">
-          Preview mode — this is how your site looks to visitors.{" "}
+        <div className="bg-blue-600 text-white text-center text-xs py-2 px-4 font-medium">
+          Preview —{" "}
           <a href={`/s/${site.subdomain}`} target="_blank" className="underline">
-            View live site →
+            open live site →
           </a>
         </div>
       )}
 
-      {/* Site navbar */}
-      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
-        <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
-          <span className="font-bold text-gray-900 text-lg">
-            {content.meta?.businessName}
-          </span>
-          <a
-            href="#contact"
-            className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 transition-colors"
-          >
-            {content.hero?.ctaText}
-          </a>
-        </div>
-      </header>
+      <SiteNavbar
+        businessName={content.meta?.businessName}
+        ctaText={content.hero?.ctaText}
+        theme={theme}
+      />
 
-      <SiteHero     content={content.hero} />
-      <SiteServices content={content.services} />
-      <SiteAbout    content={content.about} ctaText={content.hero?.ctaText} />
-      <SiteContact  content={content.contact} siteId={site.id} />
+      {/* Render sections in template-defined order */}
+      {template.sections.map(sectionId => {
+        const Section       = SECTION_REGISTRY[sectionId]
+        const sectionContent = content[sectionId]
 
-      {/* Footer */}
-      <footer className="bg-gray-950 text-gray-400 py-10 px-4 text-center text-sm">
-        <p className="font-semibold text-white mb-1">
-          {content.meta?.businessName}
-        </p>
-        {content.contact?.location && <p>{content.contact.location}</p>}
-        {content.contact?.email    && <p>{content.contact.email}</p>}
-      </footer>
+        // Skip unknown or empty sections gracefully
+        if (!Section || !sectionContent) return null
+
+        return (
+          <Section
+            key={sectionId}
+            content={sectionContent}
+            theme={theme}
+          />
+        )
+      })}
+
+      <SiteFooter content={content.contact} meta={content.meta} theme={theme} />
     </div>
   )
 }

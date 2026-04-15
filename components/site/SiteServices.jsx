@@ -1,4 +1,4 @@
-export default function SiteServices({ content }) {
+export default function SiteServices({ content, theme }) {
   if (!content?.items?.length) return null
 
   return (
@@ -11,24 +11,24 @@ export default function SiteServices({ content }) {
           {content.items.map((service, i) => (
             <div
               key={i}
-              className="border border-gray-200 rounded-2xl p-6 hover:shadow-md transition-shadow"
+              className={`border border-gray-200 rounded-2xl p-6 hover:shadow-md transition-shadow`}
             >
               <h3 className="text-lg font-semibold text-gray-900 mb-1">
                 {service.name}
               </h3>
               {service.price && (
-                <p className="text-blue-600 font-bold text-lg mb-3">
+                <p className={`${theme.priceColor} font-bold text-lg mb-3`}>
                   {service.price}
                 </p>
               )}
               {service.description && (
-                <p className="text-gray-500 text-sm leading-relaxed">
+                <p className="text-gray-500 text-sm leading-relaxed mb-4">
                   {service.description}
                 </p>
               )}
               <a
                 href="#contact"
-                className="mt-4 inline-block text-sm font-medium text-blue-600 hover:underline"
+                className={`text-sm font-medium ${theme.accentText} hover:underline`}
               >
                 Book now →
               </a>

@@ -1,7 +1,7 @@
 import { createClient } from "@/lib/supabase/server"
 
 export async function getUserProfile(userId) {
-  const supabase = createClient()
+  const supabase = await createClient()
   const { data, error } = await supabase
     .from("profiles")
     .select("*")
@@ -13,7 +13,7 @@ export async function getUserProfile(userId) {
 }
 
 export async function updateUserProfile(userId, updates) {
-  const supabase = createClient()
+  const supabase = await createClient()
   const { data, error } = await supabase
     .from("profiles")
     .update(updates)

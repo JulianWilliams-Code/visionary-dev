@@ -1,11 +1,7 @@
 import { createClient } from "@/lib/supabase/server"
 
-/**
- * Fetch all leads for a site, newest first.
- * Only accessible by the site owner (enforced by RLS).
- */
 export async function getSiteLeads(siteId) {
-  const supabase = createClient()
+  const supabase = await createClient()
   const { data, error } = await supabase
     .from("leads")
     .select("*")
@@ -16,12 +12,8 @@ export async function getSiteLeads(siteId) {
   return data
 }
 
-/**
- * Submit a lead from a public site contact/booking form.
- * Uses the anon key — RLS verifies the site is published.
- */
 export async function submitLead(siteId, leadData) {
-  const supabase = createClient()
+  const supabase = await createClient()
   const { data, error } = await supabase
     .from("leads")
     .insert({
@@ -39,12 +31,8 @@ export async function submitLead(siteId, leadData) {
   return data
 }
 
-/**
- * Update the CRM status of a lead (new → contacted → converted → archived).
- * Only the site owner can do this (enforced by RLS).
- */
 export async function updateLeadStatus(leadId, status) {
-  const supabase = createClient()
+  const supabase = await createClient()
   const { data, error } = await supabase
     .from("leads")
     .update({ status })
@@ -56,11 +44,8 @@ export async function updateLeadStatus(leadId, status) {
   return data
 }
 
-/**
- * Count leads by status for a site — used for dashboard stats.
- */
 export async function getLeadStats(siteId) {
-  const supabase = createClient()
+  const supabase = await createClient()
   const { data, error } = await supabase
     .from("leads")
     .select("status")

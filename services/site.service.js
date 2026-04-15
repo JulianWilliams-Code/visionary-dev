@@ -1,7 +1,7 @@
 import { createClient } from "@/lib/supabase/server"
 
 export async function getUserSites(userId) {
-  const supabase = createClient()
+  const supabase = await createClient()
   const { data, error } = await supabase
     .from("sites")
     .select("*")
@@ -13,7 +13,7 @@ export async function getUserSites(userId) {
 }
 
 export async function getSiteById(siteId) {
-  const supabase = createClient()
+  const supabase = await createClient()
   const { data, error } = await supabase
     .from("sites")
     .select("*")
@@ -25,7 +25,7 @@ export async function getSiteById(siteId) {
 }
 
 export async function createSite(userId, siteData) {
-  const supabase = createClient()
+  const supabase = await createClient()
   const { data, error } = await supabase
     .from("sites")
     .insert({ ...siteData, user_id: userId })
@@ -37,7 +37,7 @@ export async function createSite(userId, siteData) {
 }
 
 export async function updateSite(siteId, updates) {
-  const supabase = createClient()
+  const supabase = await createClient()
   const { data, error } = await supabase
     .from("sites")
     .update(updates)
@@ -50,7 +50,7 @@ export async function updateSite(siteId, updates) {
 }
 
 export async function deleteSite(siteId) {
-  const supabase = createClient()
+  const supabase = await createClient()
   const { error } = await supabase
     .from("sites")
     .delete()

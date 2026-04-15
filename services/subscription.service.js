@@ -1,7 +1,7 @@
 import { createClient } from "@/lib/supabase/server"
 
 export async function getUserSubscription(userId) {
-  const supabase = createClient()
+  const supabase = await createClient()
   const { data, error } = await supabase
     .from("subscriptions")
     .select("*")

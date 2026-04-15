@@ -1,4 +1,4 @@
-export const APP_NAME = "Visionary Dev"
+export const APP_NAME    = "Visionary Dev"
 export const APP_DESCRIPTION = "Your website, live in 2 minutes."
 export const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"
 
@@ -27,6 +27,13 @@ export const PLANS = {
     customDomain: true,
     removeBranding: true,
   },
+}
+
+// Stripe price IDs — set in .env.local (test) and production env vars.
+// -1 as a sentinel means "unlimited".
+export const STRIPE_PRICE_IDS = {
+  pro:    process.env.STRIPE_PRICE_PRO_MONTHLY,
+  agency: process.env.STRIPE_PRICE_AGENCY_MONTHLY,
 }
 
 export const NAV_LINKS = [

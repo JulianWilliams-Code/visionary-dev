@@ -1,8 +1,9 @@
 "use server"
 
-import { createClient }         from "@/lib/supabase/server"
-import { generateSiteContent, toSubdomain } from "@/services/generate.service"
-import { redirect }             from "next/navigation"
+import { createClient }                      from "@/lib/supabase/server"
+import { generateSiteContent, toSubdomain }  from "@/services/generate.service"
+import { redirect }                          from "next/navigation"
+import { PLANS }                             from "@/config"
 
 export async function createSiteAction(intake) {
   const supabase = await createClient()
@@ -10,6 +11,32 @@ export async function createSiteAction(intake) {
   // Verify session — never trust client-supplied user IDs
   const { data: { user }, error: authError } = await supabase.auth.getUser()
   if (authError || !user) return { error: "Not authenticated. Please sign in." }
+
+  // ── Plan limit check ──────────────────────────────────────────────────────
+  // Fetch subscription and existing site count in parallel.
+  const [{ data: subscription }, { count: siteCount }] = await Promise.all([
+    supabase
+      .from("subscriptions")
+      .select("plan")
+      .eq("user_id", user.id)
+      .maybeSingle(),
+    supabase
+      .from("sites")
+      .select("id", { count: "exact", head: true })
+      .eq("user_id", user.id),
+  ])
+
+  const plan      = subscription?.plan ?? "free"
+  const siteLimit = PLANS[plan]?.sites ?? 1   // fallback: free limit
+
+  if (siteLimit !== -1 && (siteCount ?? 0) >= siteLimit) {
+    return {
+      error:
+        plan === "free"
+          ? `Free plan is limited to ${siteLimit} site. Upgrade to Pro to add more.`
+          : `Your ${PLANS[plan].name} plan allows up to ${siteLimit} sites. Upgrade to Agency for unlimited.`,
+    }
+  }
 
   // Build a unique subdomain: try base, then base-2, base-3, …
   const base = toSubdomain(intake.businessName)

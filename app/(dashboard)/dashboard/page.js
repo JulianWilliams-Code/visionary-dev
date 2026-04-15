@@ -2,6 +2,7 @@ import Link            from "next/link"
 import { redirect }    from "next/navigation"
 import { createClient } from "@/lib/supabase/server"
 import { Button }       from "@/components/ui/Button"
+import { PLANS }        from "@/config"
 
 export const metadata = { title: "Dashboard — Visionary Dev" }
 
@@ -11,13 +12,24 @@ export default async function DashboardPage() {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect("/login")
 
-  const { data: sites } = await supabase
-    .from("sites")
-    .select("id, business_name, subdomain, published, created_at")
-    .eq("user_id", user.id)
-    .order("created_at", { ascending: false })
+  // Fetch sites and subscription in parallel
+  const [{ data: sites }, { data: subscription }] = await Promise.all([
+    supabase
+      .from("sites")
+      .select("id, business_name, subdomain, published, created_at")
+      .eq("user_id", user.id)
+      .order("created_at", { ascending: false }),
+    supabase
+      .from("subscriptions")
+      .select("plan")
+      .eq("user_id", user.id)
+      .maybeSingle(),
+  ])
 
-  const hasSites = sites && sites.length > 0
+  const hasSites  = sites && sites.length > 0
+  const plan      = subscription?.plan ?? "free"
+  const siteLimit = PLANS[plan]?.sites ?? 1
+  const atLimit   = siteLimit !== -1 && (sites?.length ?? 0) >= siteLimit
 
   return (
     <div>
@@ -28,10 +40,32 @@ export default async function DashboardPage() {
             Manage and preview your generated sites.
           </p>
         </div>
-        <Link href="/dashboard/new">
-          <Button>+ New website</Button>
-        </Link>
+        {atLimit ? (
+          <Link href="/billing">
+            <Button variant="outline">Upgrade to add more</Button>
+          </Link>
+        ) : (
+          <Link href="/dashboard/new">
+            <Button>+ New website</Button>
+          </Link>
+        )}
       </div>
+
+      {/* Upgrade nudge when at limit */}
+      {atLimit && hasSites && (
+        <div className="mb-6 rounded-xl bg-amber-50 border border-amber-200 px-4 py-3 flex items-center justify-between gap-4">
+          <p className="text-sm text-amber-800">
+            You&apos;ve reached the {siteLimit}-site limit on the{" "}
+            <strong>{PLANS[plan]?.name}</strong> plan.
+          </p>
+          <Link
+            href="/billing"
+            className="shrink-0 text-sm font-semibold text-amber-900 hover:underline"
+          >
+            Upgrade →
+          </Link>
+        </div>
+      )}
 
       {!hasSites ? (
         <div className="border-2 border-dashed border-gray-200 rounded-2xl p-16 text-center">

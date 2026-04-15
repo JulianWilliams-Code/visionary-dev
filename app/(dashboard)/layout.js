@@ -1,5 +1,8 @@
 import Sidebar from "@/components/dashboard/Sidebar"
-import Topbar from "@/components/dashboard/Topbar"
+import Topbar  from "@/components/dashboard/Topbar"
+
+// Dashboard pages are auth-protected and user-specific — never statically render them.
+export const dynamic = "force-dynamic"
 
 export default function DashboardLayout({ children }) {
   return (

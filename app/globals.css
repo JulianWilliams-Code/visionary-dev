@@ -1,12 +1,224 @@
 @import "tailwindcss";
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   DESIGN TOKENS
+   All colours, typography, spacing, and motion as CSS custom properties.
+   Dark mode values are set via @media (prefers-color-scheme: dark).
+   NEVER hardcode hex values in components — reference these vars only.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #0f0f0f;
+
+  /* ── Brand ──────────────────────────────────────────────────────────────── */
+  --color-brand:       #2563eb;   /* blue-600  — primary actions, links       */
+  --color-brand-dark:  #1d4ed8;   /* blue-700  — hover state                  */
+  --color-brand-light: #eff6ff;   /* blue-50   — tinted backgrounds            */
+
+  /* ── Accent (CTAs only) ─────────────────────────────────────────────────── */
+  --color-accent:      #f59e0b;   /* amber-500 — primary CTA buttons           */
+  --color-accent-dark: #d97706;   /* amber-600 — CTA hover state               */
+
+  /* ── Surface ────────────────────────────────────────────────────────────── */
+  --color-surface:   #ffffff;     /* card / page background                    */
+  --color-surface-2: #f9fafb;     /* gray-50   — subtle section backgrounds    */
+
+  /* ── Border ─────────────────────────────────────────────────────────────── */
+  --color-border: #e5e7eb;        /* gray-200                                  */
+
+  /* ── Text ───────────────────────────────────────────────────────────────── */
+  --color-text-primary:   #111827; /* gray-900 — headings, labels              */
+  --color-text-secondary: #374151; /* gray-700 — body copy                     */
+  --color-text-muted:     #6b7280; /* gray-500 — captions, placeholders        */
+
+  /* ── Typography ─────────────────────────────────────────────────────────── */
+  /* Injected on <html> by next/font in layout.tsx.                            */
+  /* System-font fallbacks prevent FOUT before hydration.                      */
+  --font-display: var(--font-inter, system-ui, -apple-system, sans-serif);
+  --font-body:    var(--font-inter, system-ui, -apple-system, sans-serif);
+  --font-mono:    var(--font-mono-code, 'JetBrains Mono', 'Fira Code', monospace);
+
+  /* ── Border Radii ───────────────────────────────────────────────────────── */
+  --radius-sm: 0.375rem;   /*  6px */
+  --radius-md: 0.5rem;     /*  8px */
+  --radius-lg: 0.75rem;    /* 12px */
+  --radius-xl: 1rem;       /* 16px */
+
+  /* ── Shadows ────────────────────────────────────────────────────────────── */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+  /* ── Transitions ────────────────────────────────────────────────────────── */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+
+}
+
+
+/* ── Dark mode overrides ─────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-brand:       #3b82f6;   /* blue-500  — slightly lighter on dark bg  */
+    --color-brand-dark:  #2563eb;
+    --color-brand-light: #1e3a5f;   /* deep navy tint                           */
+
+    --color-accent:      #fbbf24;   /* amber-400                                */
+    --color-accent-dark: #f59e0b;
+
+    --color-surface:   #0f172a;     /* slate-900                                */
+    --color-surface-2: #1e293b;     /* slate-800                                */
+
+    --color-border: #334155;        /* slate-700                                */
+
+    --color-text-primary:   #f8fafc; /* slate-50                                */
+    --color-text-secondary: #e2e8f0; /* slate-200                               */
+    --color-text-muted:     #94a3b8; /* slate-400                               */
+
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.3);
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BASE RESET & GLOBAL STYLES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;          /* prevent horizontal scroll globally           */
+  scroll-behavior: smooth;
+  text-size-adjust: 100%;      /* prevent iOS font scaling on orientation change */
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;               /* inherit body font — browsers don't do this   */
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   FLUID TYPOGRAPHY
+   clamp(min, fluid, max) — no fixed px sizes on headings.
+   Base: 375px viewport. Max: 1280px+.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--color-text-primary);
+  text-wrap: balance;
+}
+
+h1 { font-size: clamp(2rem,    5vw,  3.75rem); }
+h2 { font-size: clamp(1.5rem,  4vw,  3rem);    }
+h3 { font-size: clamp(1.25rem, 3vw,  2rem);    }
+h4 { font-size: clamp(1.125rem, 2.5vw, 1.5rem); }
+h5 { font-size: clamp(1rem,    2vw,  1.25rem); }
+h6 { font-size: 1rem; }
+
+p {
+  color: var(--color-text-secondary);
+  text-wrap: pretty;
+}
+
+code,
+kbd,
+pre {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ACCESSIBILITY
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Brand-coloured focus ring — replaces browser default outline              */
+:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Remove ring from mouse/pointer users                                       */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Minimum 44×44px tap targets on all interactive elements                    */
+button,
+[role="button"],
+a,
+input[type="checkbox"],
+input[type="radio"],
+select {
+  min-height: 44px;
+}
+
+/* Respect reduced-motion preferences                                         */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   UTILITY CLASSES
+   Minimal set — prefer Tailwind utilities. These fill gaps that CSS vars
+   introduce (e.g. dynamic colours not coverable by static Tailwind classes).
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.container-page {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 5vw, 2rem);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }

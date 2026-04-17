@@ -1,129 +1,222 @@
-import Link            from "next/link"
-import { redirect }    from "next/navigation"
-import { createClient } from "@/lib/supabase/server"
-import { Button }       from "@/components/ui/Button"
-import { PLANS }        from "@/config"
+import Link            from 'next/link'
+import { redirect }    from 'next/navigation'
+import { createClient } from '@/lib/supabase/server'
+import { SiteCard }    from '@/components/dashboard/SiteCard'
+import { PLANS }       from '@/config'
 
-export const metadata = { title: "Dashboard — Visionary Dev" }
+// ── Strings ───────────────────────────────────────────────────────────────────
+
+const STRINGS = {
+  heading:        'My Sites',
+  subheading:     'Manage and preview your generated sites.',
+  newSite:        '+ New site',
+  upgradeBtn:     'Upgrade to add more',
+  emptyHeading:   'No sites yet',
+  emptyBody:      'Answer 7 questions and your first site will be live in under 2 minutes.',
+  emptyCta:       'Build your first site →',
+  atLimitHeading: (plan, limit) => `You've reached the ${limit}-site limit on the ${PLANS[plan]?.name} plan.`,
+  atLimitCta:     'Upgrade →',
+}
+
+// ── Plan limit bar ────────────────────────────────────────────────────────────
+
+function PlanLimitBar({ siteCount, plan }) {
+  const limit       = PLANS[plan]?.sites ?? 1
+  const isUnlimited = limit === -1
+  const pct         = isUnlimited ? 0 : Math.min((siteCount / limit) * 100, 100)
+  const atLimit     = !isUnlimited && siteCount >= limit
+
+  const label = isUnlimited
+    ? `${siteCount} site${siteCount !== 1 ? 's' : ''}`
+    : `${siteCount} of ${limit} site${limit !== 1 ? 's' : ''} used`
+
+  return (
+    <div className="space-y-2">
+      <div className="flex items-center justify-between text-xs text-[--color-text-muted]">
+        <span>{label}</span>
+        {atLimit && (
+          <Link href="/billing" className="font-semibold text-[--color-brand] hover:underline">
+            {STRINGS.atLimitCta}
+          </Link>
+        )}
+      </div>
+      {!isUnlimited && (
+        <div className="h-1.5 overflow-hidden rounded-full bg-[--color-surface-2]">
+          <div
+            className={`h-full rounded-full transition-all duration-300 ${atLimit ? 'bg-red-500' : 'bg-[--color-brand]'}`}
+            style={{ width: `${pct}%` }}
+            role="progressbar"
+            aria-valuenow={siteCount}
+            aria-valuemin={0}
+            aria-valuemax={limit}
+            aria-label={label}
+          />
+        </div>
+      )}
+    </div>
+  )
+}
+
+// ── Empty state ───────────────────────────────────────────────────────────────
+
+function EmptyState() {
+  return (
+    <div className="flex flex-col items-center justify-center rounded-[--radius-xl] border-2 border-dashed border-[--color-border] px-6 py-20 text-center">
+      {/* Illustration */}
+      <svg
+        viewBox="0 0 80 80"
+        className="mb-5 h-20 w-20 text-[--color-text-muted]"
+        fill="none"
+        aria-hidden="true"
+      >
+        <rect x="8"  y="14" width="64" height="52" rx="6" stroke="currentColor" strokeWidth="2.5" />
+        <rect x="8"  y="14" width="64" height="14" rx="6" stroke="currentColor" strokeWidth="2.5" />
+        <circle cx="18" cy="21" r="2.5" fill="currentColor" />
+        <circle cx="26" cy="21" r="2.5" fill="currentColor" />
+        <circle cx="34" cy="21" r="2.5" fill="currentColor" />
+        <rect x="18" y="38" width="30" height="4" rx="2" fill="currentColor" opacity=".4" />
+        <rect x="18" y="48" width="20" height="3" rx="1.5" fill="currentColor" opacity=".25" />
+      </svg>
+
+      <h2 className="mb-2 text-lg font-semibold text-[--color-text-primary]">
+        {STRINGS.emptyHeading}
+      </h2>
+      <p className="mb-6 max-w-xs text-sm text-[--color-text-muted]">
+        {STRINGS.emptyBody}
+      </p>
+      <Link
+        href="/onboarding"
+        className="
+          inline-flex min-h-[44px] items-center justify-center
+          rounded-[--radius-lg] bg-[--color-brand] px-7
+          text-sm font-semibold text-white
+          hover:bg-[--color-brand-dark] transition-all duration-150
+          focus-visible:ring-2 ring-[--color-brand] ring-offset-2
+        "
+      >
+        {STRINGS.emptyCta}
+      </Link>
+    </div>
+  )
+}
+
+// ── Page ──────────────────────────────────────────────────────────────────────
+
+export const metadata = { title: 'My Sites — Visionary Dev' }
 
 export default async function DashboardPage() {
   const supabase = await createClient()
 
   const { data: { user } } = await supabase.auth.getUser()
-  if (!user) redirect("/login")
+  if (!user) redirect('/login')
 
-  // Fetch sites and subscription in parallel
-  const [{ data: sites }, { data: subscription }] = await Promise.all([
+  const [
+    { data: sites },
+    { data: subscription },
+  ] = await Promise.all([
     supabase
-      .from("sites")
-      .select("id, business_name, subdomain, published, created_at")
-      .eq("user_id", user.id)
-      .order("created_at", { ascending: false }),
+      .from('sites')
+      .select('id, subdomain, business_name, is_live, style_preference, created_at')
+      .eq('user_id', user.id)
+      .order('created_at', { ascending: false }),
     supabase
-      .from("subscriptions")
-      .select("plan")
-      .eq("user_id", user.id)
+      .from('subscriptions')
+      .select('plan')
+      .eq('user_id', user.id)
       .maybeSingle(),
   ])
 
-  const hasSites  = sites && sites.length > 0
-  const plan      = subscription?.plan ?? "free"
+  const plan      = subscription?.plan ?? 'free'
+  const siteList  = sites ?? []
+  const siteCount = siteList.length
   const siteLimit = PLANS[plan]?.sites ?? 1
-  const atLimit   = siteLimit !== -1 && (sites?.length ?? 0) >= siteLimit
+  const atLimit   = siteLimit !== -1 && siteCount >= siteLimit
 
   return (
-    <div>
-      <div className="flex items-center justify-between mb-8">
+    <div className="space-y-8">
+      {/* Page header */}
+      <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Your Websites</h1>
-          <p className="text-sm text-gray-500 mt-0.5">
-            Manage and preview your generated sites.
+          <h1
+            className="font-bold text-[--color-text-primary]"
+            style={{ fontSize: 'clamp(1.375rem, 3vw, 1.75rem)' }}
+          >
+            {STRINGS.heading}
+          </h1>
+          <p className="mt-1 text-sm text-[--color-text-muted]">
+            {STRINGS.subheading}
           </p>
         </div>
+
         {atLimit ? (
-          <Link href="/billing">
-            <Button variant="outline">Upgrade to add more</Button>
+          <Link
+            href="/billing"
+            className="
+              inline-flex min-h-[44px] items-center justify-center
+              rounded-[--radius-lg] border border-[--color-border]
+              bg-[--color-surface] px-5
+              text-sm font-medium text-[--color-text-primary]
+              hover:bg-[--color-surface-2] transition-all duration-150
+              focus-visible:ring-2 ring-[--color-brand] ring-offset-2
+            "
+          >
+            {STRINGS.upgradeBtn}
           </Link>
         ) : (
-          <Link href="/dashboard/new">
-            <Button>+ New website</Button>
+          <Link
+            href="/onboarding"
+            className="
+              inline-flex min-h-[44px] items-center justify-center
+              rounded-[--radius-lg] bg-[--color-brand] px-5
+              text-sm font-semibold text-white
+              hover:bg-[--color-brand-dark] transition-all duration-150
+              focus-visible:ring-2 ring-[--color-brand] ring-offset-2
+            "
+          >
+            {STRINGS.newSite}
           </Link>
         )}
       </div>
 
-      {/* Upgrade nudge when at limit */}
-      {atLimit && hasSites && (
-        <div className="mb-6 rounded-xl bg-amber-50 border border-amber-200 px-4 py-3 flex items-center justify-between gap-4">
+      {/* At-limit upgrade nudge */}
+      {atLimit && siteCount > 0 && (
+        <div
+          className="
+            flex flex-wrap items-center justify-between gap-4
+            rounded-[--radius-lg] border border-amber-200
+            bg-amber-50 px-4 py-3
+          "
+          role="alert"
+        >
           <p className="text-sm text-amber-800">
-            You&apos;ve reached the {siteLimit}-site limit on the{" "}
-            <strong>{PLANS[plan]?.name}</strong> plan.
+            {STRINGS.atLimitHeading(plan, siteLimit)}
           </p>
           <Link
             href="/billing"
             className="shrink-0 text-sm font-semibold text-amber-900 hover:underline"
           >
-            Upgrade →
+            {STRINGS.atLimitCta}
           </Link>
         </div>
       )}
 
-      {!hasSites ? (
-        <div className="border-2 border-dashed border-gray-200 rounded-2xl p-16 text-center">
-          <div className="text-4xl mb-4">🌐</div>
-          <h2 className="text-lg font-semibold text-gray-900 mb-2">
-            No websites yet
-          </h2>
-          <p className="text-gray-500 text-sm mb-6 max-w-xs mx-auto">
-            Answer 7 questions and your first site will be live in under 2 minutes.
-          </p>
-          <Link href="/dashboard/new">
-            <Button>Create your first website →</Button>
-          </Link>
-        </div>
-      ) : (
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {sites.map(site => (
-            <Link
-              key={site.id}
-              href={`/dashboard/sites/${site.id}`}
-              className="group block bg-white rounded-2xl border border-gray-200 p-5 hover:shadow-md transition-shadow"
-            >
-              {/* Fake browser chrome */}
-              <div className="bg-gray-50 rounded-lg p-3 mb-4 border border-gray-100">
-                <div className="flex gap-1 mb-2">
-                  <div className="h-1.5 w-1.5 rounded-full bg-gray-300" />
-                  <div className="h-1.5 w-1.5 rounded-full bg-gray-300" />
-                  <div className="h-1.5 w-1.5 rounded-full bg-gray-300" />
-                </div>
-                <div className="text-xs text-gray-400 truncate">
-                  {site.subdomain}.visionarydev.com
-                </div>
-                <div className="mt-3 space-y-1.5">
-                  <div className="h-2 w-3/4 bg-gray-200 rounded" />
-                  <div className="h-2 w-1/2 bg-gray-200 rounded" />
-                </div>
-              </div>
+      {/* Plan limit bar */}
+      <PlanLimitBar siteCount={siteCount} plan={plan} />
 
-              <div className="flex items-start justify-between">
-                <div>
-                  <p className="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
-                    {site.business_name}
-                  </p>
-                  <p className="text-xs text-gray-400 mt-0.5">
-                    {site.subdomain}.visionarydev.com
-                  </p>
-                </div>
-                <span className={`shrink-0 text-xs font-medium px-2 py-0.5 rounded-full ${
-                  site.published
-                    ? "bg-green-50 text-green-700"
-                    : "bg-gray-100 text-gray-500"
-                }`}>
-                  {site.published ? "Live" : "Draft"}
-                </span>
-              </div>
-            </Link>
+      {/* Sites grid or empty state */}
+      {siteCount === 0 ? (
+        <EmptyState />
+      ) : (
+        <ul
+          className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3"
+          aria-label="Your sites"
+        >
+          {siteList.map((site) => (
+            <li key={site.id}>
+              <SiteCard site={site} />
+            </li>
           ))}
-        </div>
+        </ul>
       )}
     </div>
   )

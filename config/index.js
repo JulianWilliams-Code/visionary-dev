@@ -38,7 +38,8 @@ export const STRIPE_PRICE_IDS = {
 
 export const NAV_LINKS = [
   { label: "Features", href: "/#features" },
-  { label: "Pricing", href: "/pricing" },
+  { label: "About",    href: "/about" },
+  { label: "Pricing",  href: "/pricing" },
 ]
 
 export const DASHBOARD_NAV = [

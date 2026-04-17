@@ -12,20 +12,21 @@ export function SignupForm({ defaultEmail = "" }) {
   // Swap the form for a confirmation message.
   if (state?.success) {
     return (
-      <div className="py-4 text-center">
-        <div className="mb-4 text-5xl">📬</div>
-        <h2 className="text-lg font-semibold text-gray-900 mb-2">
+      <div className="rounded-xl border border-[--color-border] bg-[--color-surface-2] px-6 py-8 text-center">
+        <div className="mb-4 text-5xl" aria-hidden="true">📬</div>
+        <h2 className="mb-2 text-lg font-semibold text-[--color-text-primary]">
           Check your email
         </h2>
-        <p className="text-sm text-gray-500 leading-relaxed">
+        <p className="text-sm leading-relaxed text-[--color-text-muted]">
           We sent a confirmation link to your inbox.
           Click it to activate your account and get started.
         </p>
-        <p className="mt-4 text-xs text-gray-400">
+        <p className="mt-4 text-xs text-[--color-text-muted]">
           Didn&apos;t receive it?{" "}
           <button
             onClick={() => window.location.reload()}
-            className="text-blue-600 hover:underline"
+            className="font-medium hover:underline"
+            style={{ color: 'var(--color-brand)' }}
           >
             Try again
           </button>
@@ -37,7 +38,7 @@ export function SignupForm({ defaultEmail = "" }) {
   return (
     <form action={formAction} className="space-y-5">
       {state?.error && (
-        <div className="rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">
+        <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
           {state.error}
         </div>
       )}
@@ -74,22 +75,16 @@ export function SignupForm({ defaultEmail = "" }) {
       <button
         type="submit"
         disabled={pending}
-        className="w-full rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        className="
+          w-full rounded-lg py-3 text-sm font-medium text-white
+          transition-all duration-150
+          hover:opacity-90
+          disabled:cursor-not-allowed disabled:opacity-50
+        "
+        style={{ backgroundColor: 'var(--color-accent)' }}
       >
-        {pending ? "Creating account…" : "Create free account"}
+        {pending ? "Creating account…" : "Create free account →"}
       </button>
-
-      <p className="text-center text-xs text-gray-400">
-        By signing up you agree to our{" "}
-        <Link href="/terms" className="text-blue-600 hover:underline">
-          Terms
-        </Link>{" "}
-        and{" "}
-        <Link href="/privacy" className="text-blue-600 hover:underline">
-          Privacy Policy
-        </Link>
-        .
-      </p>
     </form>
   )
 }

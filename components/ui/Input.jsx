@@ -1,16 +1,29 @@
 import { cn } from "@/lib/utils"
 
-export function Input({ label, error, className, ...props }) {
+export function Input({ label, error, id, name, className, ...props }) {
+  // Use explicit id if provided, fall back to name so htmlFor always resolves
+  const inputId = id ?? name
+
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-col gap-1.5">
       {label && (
-        <label className="text-sm font-medium text-gray-700">{label}</label>
+        <label
+          htmlFor={inputId}
+          className="text-sm font-medium text-[--color-text-primary]"
+        >
+          {label}
+        </label>
       )}
       <input
+        id={inputId}
+        name={name}
         className={cn(
-          "w-full rounded-lg border border-gray-300 px-3 py-2 text-sm",
-          "placeholder-gray-400 transition-colors",
-          "focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500",
+          "w-full rounded-lg border border-[--color-border] bg-[--color-surface]",
+          "px-4 py-3 text-sm text-[--color-text-primary]",
+          "placeholder:text-[--color-text-muted]",
+          "transition-all duration-150",
+          "focus:border-[--color-brand] focus:outline-none",
+          "focus:ring-2 focus:ring-[--color-brand] focus:ring-offset-0",
           error && "border-red-500 focus:border-red-500 focus:ring-red-500",
           className
         )}

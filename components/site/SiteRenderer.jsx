@@ -1,7 +1,7 @@
 import { TEMPLATES, DEFAULT_TEMPLATE_ID } from "@/config/templates"
 import { SECTION_REGISTRY }               from "./registry"
 import SiteNavbar                          from "./SiteNavbar"
-import SiteFooter                          from "./SiteFooter"
+import { SiteFooter }                      from "./SiteFooter"
 
 // Server Component.
 // Resolves the template, then composes the page from registry sections.

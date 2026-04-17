@@ -746,7 +746,7 @@ export function SiteEditor({ site, plan }: Props) {
 
   // Debounce refs
   const pendingRef = useRef<Record<string, unknown>>({})
-  const timerRef   = useRef<ReturnType<typeof setTimeout>>()
+  const timerRef   = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
   const { toasts, showToast, dismiss } = useToast()
 

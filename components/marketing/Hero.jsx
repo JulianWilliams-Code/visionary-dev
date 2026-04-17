@@ -13,7 +13,7 @@ export default function Hero() {
         {/* Trust badge */}
         <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-100 rounded-full px-4 py-1.5 mb-8">
           <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
-          <span className="text-sm text-blue-700 font-medium">500+ businesses launched this month</span>
+          <span className="text-sm text-blue-700 font-medium">Be one of our founding 100 members</span>
         </div>
 
         <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-gray-900 leading-[1.1]">

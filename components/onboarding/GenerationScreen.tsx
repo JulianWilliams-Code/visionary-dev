@@ -103,7 +103,7 @@ function SuccessView({
   const { reset } = useOnboardingStore()
   const [copied, setCopied] = useState(false)
 
-  const publicUrl = `https://${result.subdomain}.visionarydev.com`
+  const publicUrl = `https://${result.subdomain}.visionarydev.org`
   const previewPath = `/s/${result.subdomain}`
 
   function handleCopy() {
@@ -156,7 +156,7 @@ function SuccessView({
       <p className="mb-8 text-sm text-[--color-text-muted]">
         <span className="font-medium text-[--color-text-secondary]">{businessName}</span>
         {' · '}
-        <span className="font-mono">{result.subdomain}.visionarydev.com</span>
+        <span className="font-mono">{result.subdomain}.visionarydev.org</span>
       </p>
 
       {/* Action buttons — stacked on mobile, row on sm+ */}

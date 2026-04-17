@@ -61,7 +61,7 @@ export default function Hero() {
               <div className="h-3 w-3 rounded-full bg-green-400" />
             </div>
             <div className="flex-1 mx-4 bg-white rounded-md px-3 py-1 text-xs text-gray-400 text-left">
-              yourname.visionarydev.com
+              yourname.visionarydev.org
             </div>
           </div>
           <div className="bg-white p-8 text-left">

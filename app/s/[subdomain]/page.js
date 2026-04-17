@@ -4,7 +4,7 @@ import { SiteRenderer }  from "@/components/site/SiteRenderer"
 
 // Public site — accessible to anyone.
 // URL: /s/[subdomain]  (e.g. /s/sarahs-personal-training)
-// Production: middleware will rewrite subdomain.visionarydev.com → this route.
+// Production: middleware will rewrite subdomain.visionarydev.org → this route.
 export async function generateMetadata({ params }) {
   const { subdomain } = await params
   const supabase      = await createClient()

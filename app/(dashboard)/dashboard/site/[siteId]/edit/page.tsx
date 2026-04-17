@@ -119,7 +119,7 @@ export default async function SiteEditPage({
               <div className="flex justify-between gap-2">
                 <dt className="text-[--color-text-muted]">URL</dt>
                 <dd className="truncate font-mono text-[--color-text-secondary]">
-                  {site.subdomain}.visionarydev.com
+                  {site.subdomain}.visionarydev.org
                 </dd>
               </div>
               {site.style_preference && (

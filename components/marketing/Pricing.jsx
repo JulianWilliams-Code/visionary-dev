@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/Button"
 const planFeatures = {
   free: [
     "1 website",
-    "Free subdomain (yourname.visionarydev.com)",
+    "Free subdomain (yourname.visionarydev.org)",
     "Built-in contact form",
     "10 form submissions/month",
     "Mobile optimized",

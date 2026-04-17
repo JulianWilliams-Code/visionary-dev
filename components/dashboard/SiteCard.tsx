@@ -34,7 +34,7 @@ function BrowserChrome({ subdomain }: { subdomain: string }) {
         text-xs text-[--color-text-muted]
       ">
         <Globe size={10} aria-hidden="true" className="shrink-0" />
-        <span className="truncate">{subdomain}.visionarydev.com</span>
+        <span className="truncate">{subdomain}.visionarydev.org</span>
       </div>
       {/* Fake content lines */}
       <div className="mt-3 space-y-1.5" aria-hidden="true">
@@ -60,7 +60,7 @@ interface Props {
 export function SiteCard({ site }: Props) {
   const [copied, setCopied] = useState(false)
 
-  const publicUrl  = `https://${site.subdomain}.visionarydev.com`
+  const publicUrl  = `https://${site.subdomain}.visionarydev.org`
   const previewUrl = `/sites/${site.subdomain}`
   const editUrl    = `/dashboard/site/${site.id}/edit`
 
@@ -103,7 +103,7 @@ export function SiteCard({ site }: Props) {
           focus-visible:ring-2 ring-[--color-brand] ring-offset-1 rounded-sm
         "
       >
-        {site.subdomain}.visionarydev.com ↗
+        {site.subdomain}.visionarydev.org ↗
       </a>
 
       {/* Badges row */}

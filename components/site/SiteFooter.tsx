@@ -34,7 +34,7 @@ export function SiteFooter({
           <p className="text-xs text-[--color-text-muted]">
             Built with{' '}
             <a
-              href="https://visionarydev.com"
+              href="https://visionarydev.org"
               target="_blank"
               rel="noopener noreferrer"
               className="underline-offset-2 hover:underline"

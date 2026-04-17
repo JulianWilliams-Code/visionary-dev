@@ -17,7 +17,7 @@ const steps = [
     number: "03",
     title: "Go live and start getting clients",
     description:
-      "One click and your site is live at YourBusiness.visionarydev.com. Share it immediately. Start receiving bookings today.",
+      "One click and your site is live at YourBusiness.visionarydev.org. Share it immediately. Start receiving bookings today.",
     detail: "Custom domain available on paid plans",
   },
 ]

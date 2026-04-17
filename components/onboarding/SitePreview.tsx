@@ -54,7 +54,7 @@ export function SitePreview() {
     : DEFAULT_THEME
 
   const slug = slugify(data.businessName ?? '')
-  const url  = `${slug}.visionarydev.com`
+  const url  = `${slug}.visionarydev.org`
 
   return (
     <div className="flex flex-col h-full p-6" aria-label="Live site preview" aria-live="polite">

@@ -693,7 +693,7 @@ function DomainSection({
       {customDomain && (
         <div className="rounded-[--radius-md] bg-[--color-surface-2] px-4 py-3 text-xs text-[--color-text-secondary] space-y-1.5">
           <p className="font-semibold text-[--color-text-primary]">DNS instructions</p>
-          <p>Add a <strong>CNAME</strong> record pointing <code className="font-mono">{customDomain}</code> → <code className="font-mono">cname.visionarydev.com</code></p>
+          <p>Add a <strong>CNAME</strong> record pointing <code className="font-mono">{customDomain}</code> → <code className="font-mono">cname.visionarydev.org</code></p>
           <p className="text-[--color-text-muted]">Changes may take up to 48 hours to propagate.</p>
         </div>
       )}

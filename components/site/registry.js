@@ -10,11 +10,13 @@
 //   4. Generate its content in generate.service.js
 // That's the entire surface area of a new section.
 
-import SiteHero     from "./SiteHero"
-import SiteServices from "./SiteServices"
-import SiteAbout    from "./SiteAbout"
-import SiteContact  from "./SiteContact"
-import SiteStats    from "./SiteStats"
+// SiteHero/Services/About/Contact use named exports (TypeScript .tsx files).
+// SiteStats still uses default export (.jsx) — update when migrated.
+import { SiteHero }     from "./SiteHero"
+import { SiteServices } from "./SiteServices"
+import { SiteAbout }    from "./SiteAbout"
+import { SiteContact }  from "./SiteContact"
+import SiteStats        from "./SiteStats"
 
 export const SECTION_REGISTRY = {
   hero:     SiteHero,

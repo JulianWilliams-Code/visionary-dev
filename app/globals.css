@@ -9,29 +9,29 @@
 
 :root {
 
-  /* ── Brand ──────────────────────────────────────────────────────────────── */
-  --color-brand:       #2563eb;   /* blue-600  — primary actions, links       */
-  --color-brand-dark:  #1d4ed8;   /* blue-700  — hover state                  */
-  --color-brand-light: #eff6ff;   /* blue-50   — tinted backgrounds            */
+  /* ── Brand — Navy Blue ──────────────────────────────────────────────────── */
+  --color-brand:       #1E3A8A;   /* navy-700  — primary actions, links        */
+  --color-brand-dark:  #162d6c;   /* navy-800  — hover state                   */
+  --color-brand-light: #e8edf7;   /* navy-50   — tinted backgrounds             */
 
-  /* ── Accent (CTAs only) ─────────────────────────────────────────────────── */
-  --color-accent:      #f59e0b;   /* amber-500 — primary CTA buttons           */
-  --color-accent-dark: #d97706;   /* amber-600 — CTA hover state               */
+  /* ── Accent (CTAs only) — Bright Blue ──────────────────────────────────── */
+  --color-accent:      #2563eb;   /* blue-600  — CTA buttons (legible on white) */
+  --color-accent-dark: #1d4ed8;   /* blue-700  — CTA hover state               */
 
   /* ── Third-party brand colours ──────────────────────────────────────────── */
   --color-whatsapp:    #25D366;   /* WhatsApp official green                   */
 
-  /* ── Surface ────────────────────────────────────────────────────────────── */
-  --color-surface:   #ffffff;     /* card / page background                    */
-  --color-surface-2: #f9fafb;     /* gray-50   — subtle section backgrounds    */
+  /* ── Surface — White / Light Gray ──────────────────────────────────────── */
+  --color-surface:   #ffffff;     /* pure white — card / page background       */
+  --color-surface-2: #f1f5f9;     /* slate-100  — section backgrounds          */
 
   /* ── Border ─────────────────────────────────────────────────────────────── */
-  --color-border: #e5e7eb;        /* gray-200                                  */
+  --color-border: #cbd5e1;        /* slate-300                                 */
 
-  /* ── Text ───────────────────────────────────────────────────────────────── */
-  --color-text-primary:   #111827; /* gray-900 — headings, labels              */
-  --color-text-secondary: #374151; /* gray-700 — body copy                     */
-  --color-text-muted:     #6b7280; /* gray-500 — captions, placeholders        */
+  /* ── Text — Near-Black / Dark Gray ─────────────────────────────────────── */
+  --color-text-primary:   #0f172a; /* slate-900 — headings, labels             */
+  --color-text-secondary: #334155; /* slate-700 — body copy                    */
+  --color-text-muted:     #64748b; /* slate-500 — captions, placeholders       */
 
   /* ── Typography ─────────────────────────────────────────────────────────── */
   /* Injected on <html> by next/font in layout.tsx.                            */
@@ -63,25 +63,25 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-brand:       #3b82f6;   /* blue-500  — slightly lighter on dark bg  */
-    --color-brand-dark:  #2563eb;
-    --color-brand-light: #1e3a5f;   /* deep navy tint                           */
+    --color-brand:       #4f83cc;   /* lighter navy — legible on dark bg        */
+    --color-brand-dark:  #3b6bb5;
+    --color-brand-light: #1a2e5e;   /* dark navy tint                           */
 
-    --color-accent:      #fbbf24;   /* amber-400                                */
-    --color-accent-dark: #f59e0b;
+    --color-accent:      #3b82f6;   /* blue-500                                 */
+    --color-accent-dark: #2563eb;
 
-    --color-surface:   #0f172a;     /* slate-900                                */
+    --color-surface:   #0f172a;     /* slate-900 — near-black navy              */
     --color-surface-2: #1e293b;     /* slate-800                                */
 
     --color-border: #334155;        /* slate-700                                */
 
-    --color-text-primary:   #f8fafc; /* slate-50                                */
-    --color-text-secondary: #e2e8f0; /* slate-200                               */
+    --color-text-primary:   #f1f5f9; /* slate-100 — headings on dark bg         */
+    --color-text-secondary: #cbd5e1; /* slate-300                               */
     --color-text-muted:     #94a3b8; /* slate-400                               */
 
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.3);
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.4);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.4);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.6), 0 4px 6px -4px rgb(0 0 0 / 0.4);
   }
 }
 

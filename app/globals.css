@@ -18,6 +18,9 @@
   --color-accent:      #f59e0b;   /* amber-500 — primary CTA buttons           */
   --color-accent-dark: #d97706;   /* amber-600 — CTA hover state               */
 
+  /* ── Third-party brand colours ──────────────────────────────────────────── */
+  --color-whatsapp:    #25D366;   /* WhatsApp official green                   */
+
   /* ── Surface ────────────────────────────────────────────────────────────── */
   --color-surface:   #ffffff;     /* card / page background                    */
   --color-surface-2: #f9fafb;     /* gray-50   — subtle section backgrounds    */

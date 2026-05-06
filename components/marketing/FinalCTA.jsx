@@ -1,59 +1,69 @@
+import { Check } from 'lucide-react'
+
+const reassurances = [
+  'No credit card required',
+  'Free plan, no expiry',
+  'Live in 2 minutes',
+  'Cancel anytime',
+]
+
 export default function FinalCTA() {
   return (
-    <section className="bg-gray-950 px-4 py-24">
-      <div className="max-w-3xl mx-auto text-center">
-        <span className="text-sm font-semibold text-blue-400 uppercase tracking-widest">
-          Ready?
-        </span>
-        <h2 className="mt-4 text-4xl md:text-5xl font-bold text-white leading-tight">
-          Your first website is{" "}
-          <span className="text-blue-400">completely free.</span>
-        </h2>
-        <p className="mt-6 text-lg text-gray-400 max-w-xl mx-auto">
-          No credit card. No commitment. No designer required. Just 7 questions
-          and 2 minutes of your time — and your business goes from invisible to unstoppable.
+    <section className="px-4 py-24" style={{ backgroundColor: 'var(--color-text-primary)' }}>
+      <div className="mx-auto max-w-2xl text-center">
+
+        <p className="mb-4 text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--color-brand-light)' }}>
+          Get started
         </p>
 
-        {/* Lead capture form */}
+        <h2
+          className="font-bold text-white"
+          style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', lineHeight: 1.15 }}
+        >
+          Your first website is{' '}
+          <span style={{ color: 'var(--color-brand-light)' }}>completely free.</span>
+        </h2>
+
+        <p className="mx-auto mt-5 max-w-md text-base leading-relaxed" style={{ color: 'rgba(255,255,255,0.55)' }}>
+          No credit card. No designer. Just 7 questions and your business is online.
+        </p>
+
         <form
           action="/signup"
           method="get"
-          className="mt-10 flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
+          className="mx-auto mt-10 flex max-w-sm flex-col gap-3 sm:flex-row"
         >
           <input
             type="email"
             name="email"
-            placeholder="Enter your email"
+            placeholder="your@email.com"
             required
-            className="flex-1 rounded-lg border border-gray-700 bg-gray-900 px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="
+              flex-1 rounded-lg px-4 py-3 text-sm text-white
+              placeholder:text-white/40
+              transition-all duration-150
+              focus:outline-none focus:ring-2 focus:ring-white/40
+            "
+            style={{ backgroundColor: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)' }}
           />
           <button
             type="submit"
-            className="whitespace-nowrap rounded-lg bg-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-500 transition-colors"
+            className="whitespace-nowrap rounded-lg px-6 py-3 text-sm font-semibold text-white transition-opacity duration-150 hover:opacity-90"
+            style={{ backgroundColor: 'var(--color-accent)' }}
           >
             Get started free →
           </button>
         </form>
 
-        <p className="mt-4 text-xs text-gray-600">
-          Join 500+ fitness trainers, coaches, and consultants already growing with Visionary Dev.
-        </p>
+        <ul className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+          {reassurances.map((text) => (
+            <li key={text} className="flex items-center gap-2 text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>
+              <Check size={14} className="text-green-400 shrink-0" aria-hidden="true" />
+              {text}
+            </li>
+          ))}
+        </ul>
 
-        {/* Risk reversal */}
-        <div className="mt-12 flex flex-wrap items-center justify-center gap-8 text-sm text-gray-500">
-          <div className="flex items-center gap-2">
-            <span className="text-green-400">✓</span> No credit card required
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-green-400">✓</span> Live in 2 minutes
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-green-400">✓</span> Cancel anytime
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-green-400">✓</span> Free plan forever
-          </div>
-        </div>
       </div>
     </section>
   )

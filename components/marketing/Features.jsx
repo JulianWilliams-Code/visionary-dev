@@ -1,71 +1,83 @@
+import { Zap, PenLine, Inbox, Smartphone, Globe, Shield } from 'lucide-react'
+
+// Every feature listed here is actually built and shipped.
+// No booking automation, no auto-replies — those aren't real yet.
 const features = [
   {
-    icon: "⚡",
-    title: "Generated in minutes",
-    description:
-      "No templates to customize. No design decisions to agonize over. Your site is built automatically, tailored to your exact business.",
+    Icon:        Zap,
+    title:       'Generated in minutes',
+    description: 'No templates to customize, no design decisions to make. Answer 7 questions and your site is built automatically — layout, copy, and structure tailored to your business.',
   },
   {
-    icon: "📅",
-    title: "Built-in booking system",
-    description:
-      "Clients can schedule directly from your website, 24/7. Wake up to new appointments without lifting a finger.",
+    Icon:        PenLine,
+    title:       'Copy written for you',
+    description: 'We generate the headlines, about section, and service descriptions based on what you told us about your business. You get a real site, not a placeholder.',
   },
   {
-    icon: "📬",
-    title: "Automated lead capture",
-    description:
-      "Every inquiry hits your inbox instantly. Auto-replies keep leads warm while you're busy with your actual clients.",
+    Icon:        Inbox,
+    title:       'Leads captured to your dashboard',
+    description: 'Every contact form submission is stored in your dashboard. You can see who reached out, when, and what they said — all in one place.',
   },
   {
-    icon: "📱",
-    title: "Mobile-first by default",
-    description:
-      "80% of your future clients will find you on their phone. Every Visionary Dev site looks perfect on every screen, always.",
+    Icon:        Smartphone,
+    title:       'Mobile-first by default',
+    description: 'Most of your potential clients will find you on their phone. Every Visionary Dev site is built to look sharp on every screen, without you thinking about it.',
   },
   {
-    icon: "🌐",
-    title: "Custom domain ready",
-    description:
-      "Start on your free subdomain, then connect YourBusiness.com when you're ready. We handle all the technical setup.",
+    Icon:        Globe,
+    title:       'Custom domain on Pro',
+    description: 'Start on your free subdomain (yourname.visionarydev.org). Upgrade to connect your own domain — we give you step-by-step DNS instructions and handle SSL.',
   },
   {
-    icon: "🔒",
-    title: "We handle everything else",
-    description:
-      "Security patches, speed optimization, uptime monitoring — all taken care of. You never think about the website again.",
+    Icon:        Shield,
+    title:       'Hosting and uptime handled',
+    description: "Speed, security, and uptime are our problem, not yours. Your site runs on enterprise infrastructure — you focus on clients, not servers.",
   },
 ]
 
 export default function Features() {
   return (
-    <section id="features" className="bg-gray-50 px-4 py-24">
-      <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-16">
-          <span className="text-sm font-semibold text-blue-600 uppercase tracking-widest">
+    <section id="features" className="bg-[--color-surface-2] px-4 py-24">
+      <div className="mx-auto max-w-5xl">
+
+        <div className="mb-16 text-center">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-[--color-brand]">
             Features
-          </span>
-          <h2 className="mt-3 text-3xl md:text-4xl font-bold text-gray-900">
-            Everything your website needs to turn{" "}
-            <span className="text-blue-600">visitors into clients.</span>
+          </p>
+          <h2
+            className="font-bold text-[--color-text-primary]"
+            style={{ fontSize: 'clamp(1.5rem, 4vw, 2.25rem)' }}
+          >
+            Everything you need to get online and get clients.
           </h2>
-          <p className="mt-4 text-gray-500 max-w-xl mx-auto">
-            Built specifically for service businesses. Not a generic tool — a revenue-generating machine for your specific type of work.
+          <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-[--color-text-muted]">
+            Built specifically for service businesses. Not a generic builder — a focused tool for your type of work.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {features.map((feature) => (
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {features.map(({ Icon, title, description }) => (
             <div
-              key={feature.title}
-              className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow"
+              key={title}
+              className="
+                flex flex-col gap-3 rounded-[--radius-lg]
+                border border-[--color-border] bg-[--color-surface] p-6
+                transition-all duration-150 hover:shadow-md
+              "
             >
-              <div className="text-2xl mb-4">{feature.icon}</div>
-              <h3 className="text-base font-semibold text-gray-900 mb-2">{feature.title}</h3>
-              <p className="text-gray-500 text-sm leading-relaxed">{feature.description}</p>
+              <div
+                className="flex h-10 w-10 items-center justify-center rounded-lg"
+                style={{ backgroundColor: 'var(--color-brand-light)' }}
+                aria-hidden="true"
+              >
+                <Icon size={18} style={{ color: 'var(--color-brand)' }} />
+              </div>
+              <h3 className="text-sm font-semibold text-[--color-text-primary]">{title}</h3>
+              <p className="text-sm leading-relaxed text-[--color-text-muted]">{description}</p>
             </div>
           ))}
         </div>
+
       </div>
     </section>
   )

@@ -1,7 +1,7 @@
-// Server Component — all interactivity is href anchors (no JS needed).
+// Server Component — no JS required, all interactivity is plain anchors.
 import Image from 'next/image'
 
-// ── CTA helpers ───────────────────────────────────────────────────────────────
+// ── CTA label ─────────────────────────────────────────────────────────────────
 
 function primaryCtaLabel(methods: string[]): string {
   const first = methods[0]
@@ -11,7 +11,7 @@ function primaryCtaLabel(methods: string[]): string {
   return 'Get in touch'
 }
 
-// ── Modality / location badges ────────────────────────────────────────────────
+// ── Location / modality badges ────────────────────────────────────────────────
 
 const MODALITY_LABEL: Record<string, string> = {
   in_person: 'In Person',
@@ -19,33 +19,23 @@ const MODALITY_LABEL: Record<string, string> = {
   both:      'In Person & Online',
 }
 
-function Badges({
-  modality,
-  city,
-  state,
-}: {
-  modality: string | null
-  city:     string | null
-  state:    string | null
-}) {
-  const pills: string[] = []
-  if (modality) pills.push(MODALITY_LABEL[modality] ?? modality)
-  const location = [city, state].filter(Boolean).join(', ')
-  if (location)  pills.push(location)
-  if (pills.length === 0) return null
+function LocationBadges({
+  modality, city, state,
+}: { modality: string | null; city: string | null; state: string | null }) {
+  const parts: string[] = []
+  if (modality) parts.push(MODALITY_LABEL[modality] ?? modality)
+  const loc = [city, state].filter(Boolean).join(', ')
+  if (loc) parts.push(loc)
+  if (parts.length === 0) return null
 
   return (
-    <div className="flex flex-wrap justify-center gap-2 md:justify-start" aria-label="Location and modality">
-      {pills.map((pill) => (
+    <div className="flex flex-wrap justify-center gap-2 md:justify-start" aria-label="Service area">
+      {parts.map((p) => (
         <span
-          key={pill}
-          className="
-            rounded-full border border-black/10 bg-white/60
-            px-3 py-1 text-xs font-medium
-            text-[--color-text-secondary] backdrop-blur-sm
-          "
+          key={p}
+          className="rounded-full border border-[--color-border] bg-[--color-surface-2] px-3 py-1 text-xs font-medium text-[--color-text-muted]"
         >
-          {pill}
+          {p}
         </span>
       ))}
     </div>
@@ -67,54 +57,56 @@ interface Props {
 // ── Component ─────────────────────────────────────────────────────────────────
 
 export function SiteHero({
-  businessName,
-  tagline,
-  modality,
-  locationCity,
-  locationState,
-  contactMethods,
-  avatarUrl,
+  businessName, tagline, modality, locationCity, locationState,
+  contactMethods, avatarUrl,
 }: Props) {
   const ctaLabel = primaryCtaLabel(contactMethods)
+
+  // The value proposition is the headline — not the brand name.
+  // A visitor cares about "I help busy professionals lose weight"
+  // before they care about "Sarah's Training Studio."
+  // If there's no tagline, fall back to businessName as the H1.
+  const headline      = tagline ? `I help ${tagline}.` : businessName
+  const showNameLabel = Boolean(tagline)
 
   return (
     <section
       id="hero"
-      className="
-        flex min-h-[85vh] items-center
-        bg-[--color-surface] px-6 py-20
-      "
+      className="flex min-h-[80vh] items-center bg-[--color-surface] px-6 py-20"
     >
       <div className="mx-auto w-full max-w-5xl">
-        <div className="flex flex-col-reverse items-center gap-10 md:flex-row">
+        <div className="flex flex-col-reverse items-center gap-12 md:flex-row">
 
-          {/* ── Text column ── */}
-          <div className="flex flex-1 flex-col items-center gap-5 text-center md:items-start md:text-left">
+          {/* ── Text ── */}
+          <div className="flex flex-1 flex-col items-center gap-4 text-center md:items-start md:text-left">
 
-            <Badges
+            {/* Business name — small label, not the headline */}
+            {showNameLabel && (
+              <p
+                className="text-xs font-semibold uppercase tracking-widest"
+                style={{ color: 'var(--brand, #1E3A8A)' }}
+              >
+                {businessName}
+              </p>
+            )}
+
+            {/* H1 — the value proposition */}
+            <h1
+              className="font-bold leading-tight tracking-tight text-[--color-text-primary]"
+              style={{ fontSize: 'clamp(2rem, 5.5vw, 3.5rem)' }}
+            >
+              {headline}
+            </h1>
+
+            {/* Location/modality context — below the headline, not above */}
+            <LocationBadges
               modality={modality}
               city={locationCity}
               state={locationState}
             />
 
-            <h1
-              className="font-bold leading-tight tracking-tight"
-              style={{
-                fontSize: 'clamp(2rem, 6vw, 4rem)',
-                color: 'var(--brand, #2563eb)',
-              }}
-            >
-              {businessName}
-            </h1>
-
-            {tagline && (
-              <p className="max-w-lg text-lg leading-relaxed text-[--color-text-secondary]">
-                I help {tagline}
-              </p>
-            )}
-
             {/* CTAs */}
-            <div className="mt-2 flex flex-wrap justify-center gap-3 md:justify-start">
+            <div className="mt-3 flex flex-wrap justify-center gap-3 md:justify-start">
               <a
                 href="#contact"
                 className="
@@ -122,11 +114,10 @@ export function SiteHero({
                   rounded-[var(--radius,0.5rem)] px-7 text-sm font-semibold text-white
                   transition-opacity duration-150 hover:opacity-90
                 "
-                style={{ backgroundColor: 'var(--brand, #2563eb)' }}
+                style={{ backgroundColor: 'var(--brand, #1E3A8A)' }}
               >
                 {ctaLabel}
               </a>
-
               <a
                 href="#services"
                 className="
@@ -137,22 +128,28 @@ export function SiteHero({
                   transition-colors duration-150 hover:bg-[--color-surface-2]
                 "
               >
-                See my services ↓
+                See my services
               </a>
             </div>
+
           </div>
 
-          {/* ── Avatar column ── */}
+          {/* ── Avatar ── */}
           {avatarUrl && (
             <div className="shrink-0">
-              <Image
-                src={avatarUrl}
-                alt={businessName}
-                width={224}
-                height={224}
-                priority
-                className="h-44 w-44 rounded-full object-cover shadow-lg md:h-56 md:w-56"
-              />
+              <div
+                className="rounded-full p-1"
+                style={{ backgroundColor: 'var(--brand, #1E3A8A)' }}
+              >
+                <Image
+                  src={avatarUrl}
+                  alt={businessName}
+                  width={224}
+                  height={224}
+                  priority
+                  className="h-44 w-44 rounded-full object-cover shadow-md md:h-52 md:w-52"
+                />
+              </div>
             </div>
           )}
 

@@ -14,11 +14,10 @@ const planFeatures = {
   pro: [
     "Up to 10 websites",
     "Custom domain included",
-    "Built-in booking system",
     "Unlimited form submissions",
-    "Automated lead follow-up emails",
     "No Visionary Dev branding",
     "Priority support",
+    "Early access to new features",
   ],
   agency: [
     "Unlimited websites",
@@ -32,7 +31,13 @@ const planFeatures = {
 
 function Check() {
   return (
-    <svg className="h-4 w-4 text-blue-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <svg
+      className="h-4 w-4 shrink-0"
+      style={{ color: 'var(--color-brand)' }}
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
     </svg>
   )
@@ -40,16 +45,19 @@ function Check() {
 
 export default function Pricing() {
   return (
-    <section id="pricing" className="bg-gray-50 px-4 py-24">
+    <section id="pricing" className="bg-[--color-surface-2] px-4 py-24">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
-          <span className="text-sm font-semibold text-blue-600 uppercase tracking-widest">
+          <span
+            className="text-sm font-semibold uppercase tracking-widest"
+            style={{ color: 'var(--color-brand)' }}
+          >
             Pricing
           </span>
-          <h2 className="mt-3 text-3xl md:text-4xl font-bold text-gray-900">
+          <h2 className="mt-3 text-3xl md:text-4xl font-bold text-[--color-text-primary]">
             Simple, honest pricing.
           </h2>
-          <p className="mt-4 text-gray-500">
+          <p className="mt-4 text-[--color-text-muted]">
             Start free. Upgrade when you&apos;re ready. No surprise charges, ever.
           </p>
         </div>
@@ -58,34 +66,41 @@ export default function Pricing() {
           {Object.entries(PLANS).map(([key, plan]) => (
             <div
               key={key}
-              className={`rounded-2xl p-6 border bg-white flex flex-col ${
+              className={`rounded-2xl p-6 border bg-[--color-surface] flex flex-col ${
                 key === "pro"
-                  ? "border-blue-600 shadow-xl ring-1 ring-blue-600 relative"
-                  : "border-gray-200 shadow-sm"
+                  ? "shadow-xl relative"
+                  : "border-[--color-border] shadow-sm"
               }`}
+              style={key === "pro" ? {
+                borderColor: 'var(--color-brand)',
+                boxShadow: '0 0 0 1px var(--color-brand), 0 20px 25px -5px rgba(0,0,0,0.1)',
+              } : {}}
             >
               {key === "pro" && (
                 <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                  <span className="bg-blue-600 text-white text-xs font-semibold px-4 py-1 rounded-full whitespace-nowrap">
+                  <span
+                    className="text-white text-xs font-semibold px-4 py-1 rounded-full whitespace-nowrap"
+                    style={{ backgroundColor: 'var(--color-brand)' }}
+                  >
                     Most popular
                   </span>
                 </div>
               )}
 
               <div>
-                <p className="text-sm font-semibold text-gray-500 uppercase tracking-wide">{plan.name}</p>
+                <p className="text-sm font-semibold text-[--color-text-muted] uppercase tracking-wide">{plan.name}</p>
                 <div className="mt-2 flex items-baseline gap-1">
-                  <span className="text-4xl font-bold text-gray-900">${plan.price}</span>
-                  <span className="text-gray-400 text-sm">/month</span>
+                  <span className="text-4xl font-bold text-[--color-text-primary]">${plan.price}</span>
+                  <span className="text-[--color-text-muted] text-sm">/month</span>
                 </div>
-                <p className="mt-1 text-xs text-gray-400">
+                <p className="mt-1 text-xs text-[--color-text-muted]">
                   {plan.price === 0 ? "Free forever" : "Billed monthly, cancel anytime"}
                 </p>
               </div>
 
               <ul className="mt-6 space-y-3 flex-1">
                 {planFeatures[key].map((feature) => (
-                  <li key={feature} className="flex items-start gap-2.5 text-sm text-gray-600">
+                  <li key={feature} className="flex items-start gap-2.5 text-sm text-[--color-text-secondary]">
                     <Check />
                     {feature}
                   </li>
@@ -104,10 +119,14 @@ export default function Pricing() {
           ))}
         </div>
 
-        <p className="mt-8 text-center text-sm text-gray-400">
+        <p className="mt-8 text-center text-sm text-[--color-text-muted]">
           All plans include SSL, hosting, and automatic updates.
           Questions?{" "}
-          <a href="mailto:hello@visionarydev.xyz" className="text-blue-600 hover:underline">
+          <a
+            href="mailto:hello@visionarydev.xyz"
+            className="hover:underline"
+            style={{ color: 'var(--color-brand)' }}
+          >
             Talk to us.
           </a>
         </p>

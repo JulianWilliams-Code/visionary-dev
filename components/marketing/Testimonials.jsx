@@ -3,16 +3,19 @@ import { Crown } from "lucide-react"
 
 export default function Testimonials() {
   return (
-    <section className="bg-white px-4 py-24">
+    <section className="bg-[--color-surface] px-4 py-24">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
-          <span className="text-sm font-semibold text-blue-600 uppercase tracking-widest">
+          <span
+            className="text-sm font-semibold uppercase tracking-widest"
+            style={{ color: 'var(--color-brand)' }}
+          >
             Early access
           </span>
-          <h2 className="mt-3 text-3xl md:text-4xl font-bold text-gray-900">
+          <h2 className="mt-3 text-3xl md:text-4xl font-bold text-[--color-text-primary]">
             Be part of something from the start.
           </h2>
-          <p className="mt-4 text-gray-500">
+          <p className="mt-4 text-[--color-text-muted]">
             We&rsquo;re just getting started — and founding members get the best deal we&rsquo;ll ever offer.
           </p>
         </div>
@@ -43,18 +46,18 @@ export default function Testimonials() {
         </div>
 
         {/* Stats bar */}
-        <div className="mt-12 grid grid-cols-3 gap-4 text-center border-t border-gray-100 pt-12">
+        <div className="mt-12 grid grid-cols-3 gap-4 text-center border-t border-[--color-border] pt-12">
           <div>
-            <p className="text-lg font-bold text-gray-900 leading-snug">Founding<br />100</p>
-            <p className="text-sm text-gray-500 mt-1">Be one of our founding members</p>
+            <p className="text-lg font-bold text-[--color-text-primary] leading-snug">Founding<br />100</p>
+            <p className="text-sm text-[--color-text-muted] mt-1">Be one of our founding members</p>
           </div>
           <div>
-            <p className="text-3xl font-bold text-gray-900">2 min</p>
-            <p className="text-sm text-gray-500 mt-1">Average setup time</p>
+            <p className="text-3xl font-bold text-[--color-text-primary]">2 min</p>
+            <p className="text-sm text-[--color-text-muted] mt-1">Average setup time</p>
           </div>
           <div>
-            <p className="text-3xl font-bold text-gray-900">$19</p>
-            <p className="text-sm text-gray-500 mt-1">Early access — limited spots</p>
+            <p className="text-3xl font-bold text-[--color-text-primary]">$19</p>
+            <p className="text-sm text-[--color-text-muted] mt-1">Early access — limited spots</p>
           </div>
         </div>
       </div>

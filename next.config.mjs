@@ -12,6 +12,18 @@ const nextConfig = {
     ],
   },
 
+  async redirects() {
+    return [
+      // Redirect www → non-www so auth cookies and subdomains work correctly.
+      {
+        source:      '/:path*',
+        has: [{ type: 'host', value: 'www.visionarydev.org' }],
+        destination: 'https://visionarydev.org/:path*',
+        permanent:   true,
+      },
+    ]
+  },
+
   async rewrites() {
     return {
       beforeFiles: [
@@ -33,7 +45,7 @@ const nextConfig = {
           has: [
             {
               type:  'host',
-              value: '(?<subdomain>[^.]+)\\.visionarydev\\.com',
+              value: '(?<subdomain>[^.]+)\\.visionarydev\\.org',
             },
           ],
           destination: '/sites/:subdomain/:path*',

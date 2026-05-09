@@ -12,7 +12,7 @@ export function LoginForm({ defaultEmail = "" }) {
     <form action={formAction} className="space-y-5">
       {state?.error && (
         <div className="rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">
-          {state.error}
+          {typeof state.error === "string" ? state.error : "Something went wrong. Please try again."}
         </div>
       )}
 
@@ -48,7 +48,8 @@ export function LoginForm({ defaultEmail = "" }) {
       <button
         type="submit"
         disabled={pending}
-        className="w-full rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        className="w-full rounded-lg px-4 py-2.5 text-sm font-semibold text-white hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity"
+        style={{ backgroundColor: 'var(--color-accent)' }}
       >
         {pending ? "Signing in…" : "Sign in"}
       </button>

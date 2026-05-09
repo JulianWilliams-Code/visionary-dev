@@ -39,7 +39,7 @@ export function SignupForm({ defaultEmail = "" }) {
     <form action={formAction} className="space-y-5">
       {state?.error && (
         <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
-          {state.error}
+          {typeof state.error === "string" ? state.error : "Something went wrong. Please try again."}
         </div>
       )}
 

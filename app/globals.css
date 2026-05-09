@@ -59,7 +59,31 @@
 }
 
 
-/* Dark mode intentionally not supported — site uses a fixed light theme. */
+/* ── Dark mode overrides ─────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-brand:       #4f83cc;   /* lighter navy — legible on dark bg        */
+    --color-brand-dark:  #3b6bb5;
+    --color-brand-light: #1a2e5e;   /* dark navy tint                           */
+
+    --color-accent:      #3b82f6;   /* blue-500                                 */
+    --color-accent-dark: #2563eb;
+
+    --color-surface:   #0f172a;     /* slate-900 — near-black navy              */
+    --color-surface-2: #1e293b;     /* slate-800                                */
+
+    --color-border: #334155;        /* slate-700                                */
+
+    --color-text-primary:   #f1f5f9; /* slate-100 — headings on dark bg         */
+    --color-text-secondary: #cbd5e1; /* slate-300                               */
+    --color-text-muted:     #94a3b8; /* slate-400                               */
+
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.4);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.4);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.6), 0 4px 6px -4px rgb(0 0 0 / 0.4);
+  }
+}
 
 
 /* ═══════════════════════════════════════════════════════════════════════════

@@ -15,6 +15,11 @@ export async function GET(request) {
     const { error } = await supabase.auth.verifyOtp({ type, token_hash })
 
     if (!error) {
+      // For signup confirmations, send new users straight to onboarding.
+      // For other token types (e.g. password reset), respect the next param.
+      if (type === 'signup') {
+        return NextResponse.redirect(`${origin}/onboarding`)
+      }
       return NextResponse.redirect(`${origin}${next}`)
     }
   }

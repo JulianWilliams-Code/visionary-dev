@@ -132,6 +132,10 @@ export default async function DashboardPage() {
   const siteLimit = PLANS[plan]?.sites ?? 1
   const atLimit   = siteLimit !== -1 && siteCount >= siteLimit
 
+  // New users have no sites — send them straight into onboarding
+  // instead of showing an empty dashboard.
+  if (siteCount === 0) redirect('/onboarding')
+
   return (
     <div className="space-y-8">
       {/* Page header */}

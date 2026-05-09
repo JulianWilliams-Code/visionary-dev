@@ -6,10 +6,11 @@ export async function middleware(request) {
 
 export const config = {
   matcher: [
-    /*
-     * Run on all page routes except static assets and API routes.
-     * Excludes: _next/static, _next/image, favicon, and /api/* (Stripe webhooks etc.)
-     */
-    "/((?!_next/static|_next/image|favicon.ico|api/).*)",
+    "/dashboard/:path*",
+    "/settings/:path*",
+    "/billing/:path*",
+    "/onboarding/:path*",
+    "/login",
+    "/signup",
   ],
 }

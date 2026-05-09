@@ -52,7 +52,7 @@ const slideVariants = {
 
 export function OnboardingShell() {
   const router = useRouter()
-  const { steps, currentStepIndex, goNext, goBack, canAdvance } = useOnboardingStore()
+  const { steps, currentStepIndex, goNext, goBack, canAdvance, reset } = useOnboardingStore()
 
   const step = steps[currentStepIndex]
   if (!step) return null
@@ -80,7 +80,18 @@ export function OnboardingShell() {
         {/* Scrollable content area */}
         <div className="flex-1 overflow-y-auto">
           <div className="mx-auto w-full max-w-xl px-6 pt-10 pb-6">
-            <ProgressBar />
+            <div className="flex items-center justify-between mb-2">
+              <ProgressBar />
+              {currentStepIndex > 0 && (
+                <button
+                  type="button"
+                  onClick={reset}
+                  className="text-xs text-[--color-text-muted] hover:text-[--color-text-secondary] transition-colors"
+                >
+                  Start over
+                </button>
+              )}
+            </div>
 
             <AnimatePresence mode="wait">
               <motion.div

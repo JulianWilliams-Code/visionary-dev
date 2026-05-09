@@ -7,12 +7,9 @@ export async function middleware(request) {
 export const config = {
   matcher: [
     /*
-     * Run on all routes except:
-     * - _next/static  (static files)
-     * - _next/image   (image optimisation)
-     * - favicon.ico, sitemap.xml, robots.txt
-     * This ensures Supabase can refresh the session token on every request.
+     * Run on all page routes except static assets and API routes.
+     * Excludes: _next/static, _next/image, favicon, and /api/* (Stripe webhooks etc.)
      */
-    "/((?!_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
+    "/((?!_next/static|_next/image|favicon.ico|api/).*)",
   ],
 }

@@ -12,7 +12,7 @@ export function SignupForm({ defaultEmail = "" }) {
   // Swap the form for a confirmation message.
   if (state?.success) {
     return (
-      <div className="rounded-xl border border-[--color-border] bg-[--color-surface-2] px-6 py-8 text-center">
+      <div className="px-6 py-8 text-center">
         <div className="mb-4 text-5xl" aria-hidden="true">📬</div>
         <h2 className="mb-2 text-lg font-semibold text-[--color-text-primary]">
           Check your email

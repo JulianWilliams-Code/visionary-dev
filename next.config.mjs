@@ -33,7 +33,7 @@ const nextConfig = {
           has: [
             {
               type:  'host',
-              value: '(?<subdomain>[^.]+)\\.visionarydev\\.org',
+              value: '(?<subdomain>(?!www\\b)[^.]+)\\.visionarydev\\.org',
             },
           ],
           destination: '/sites/:subdomain/:path*',

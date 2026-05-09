@@ -103,14 +103,12 @@ export function OnboardingShell() {
         </div>
 
         {/* ── Navigation bar ─────────────────────────────────────── */}
-        {/* sticky on mobile, flows naturally on desktop */}
         <div
           className="
-            shrink-0 sticky bottom-0 z-10
+            shrink-0
             border-t border-[--color-border] bg-[--color-surface]
             px-6 py-4
             flex items-center justify-between gap-4
-            lg:relative lg:bottom-auto lg:z-auto
           "
         >
           {/* Back button — hidden on step 1 */}

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function OnboardingLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="min-h-dvh flex flex-col bg-[--color-surface]">
+    <div className="h-dvh flex flex-col bg-[--color-surface] overflow-hidden">
       {/* ── Header ──────────────────────────────────────────────── */}
       <header className="shrink-0 border-b border-[--color-border] px-6 py-4">
         <Link

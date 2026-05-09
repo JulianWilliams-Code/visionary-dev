@@ -77,7 +77,7 @@ export default function FAQ() {
         </div>
 
         {/* Accordion */}
-        <div className="divide-y divide-[--color-border] rounded-xl border border-[--color-border] bg-[--color-surface] overflow-hidden">
+        <div className="divide-y divide-[--color-border] rounded-2xl border border-[--color-border] bg-[--color-surface] overflow-hidden">
           {ITEMS.map((item, i) => {
             const isOpen    = openIndex === i
             const triggerId = `faq-trigger-${baseId}-${i}`

@@ -60,7 +60,7 @@ export default function Features() {
             <div
               key={title}
               className="
-                flex flex-col gap-3 rounded-[--radius-lg]
+                flex flex-col gap-3 rounded-2xl
                 border border-[--color-border] bg-[--color-surface] p-6
                 transition-all duration-150 hover:shadow-md
               "

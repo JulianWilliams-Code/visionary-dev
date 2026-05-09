@@ -45,7 +45,7 @@ export default function Problem() {
           {problems.map(({ Icon, heading, body }) => (
             <div
               key={heading}
-              className="rounded-xl border p-6"
+              className="rounded-2xl border p-6"
               style={{
                 borderColor:     'rgba(255,255,255,0.07)',
                 backgroundColor: 'rgba(255,255,255,0.03)',
